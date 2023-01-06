@@ -1,0 +1,42 @@
+body {
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  display: block;
+}
+
+canvas {
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+}
+
+#video {
+  opacity: 0;
+}
+
+#preload {
+  opacity: 0;
+}
+
+#ui {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  z-index: 100;
+}
+
+#text {
+  display: none;
+}
+
+/*# sourceMappingURL=styles.css.map */
