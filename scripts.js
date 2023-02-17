@@ -1,3 +1,5 @@
+
+    
     
     var v = document.getElementById('video');
     var a = document.getElementById('audio');
@@ -6,16 +8,47 @@
     var back = document.createElement('canvas');
     var backcontext = back.getContext('2d');
     var cw,ch,scale;
-    var img = document.getElementById("preload");
     cw = window.innerWidth;
     ch = window.innerHeight;
+    console.log(cw);
+    console.log(ch);
+    if (cw >= ch) {
+        canvas.width = ch;
+        canvas.height = ch;
+    }
+    else {
+        canvas.width = cw;
+        canvas.height = cw;
+    }
 
-  
+
+    window.addEventListener('resize', () => {
+        console.log('resized');
+        cw = window.innerWidth;
+        ch = window.innerHeight;
+
+    });
+ 
+    let MAX_ZOOM = 1
+    let MIN_ZOOM = 0.1
+    let cameraOffset = { x: cw/2, y: ch/2 }
     var preload = new Image();
     preload.onload = function() {
-        context.drawImage(preload, 0, 0, cw, ch);
+        context.scale(MIN_ZOOM, MIN_ZOOM);
+        if (cw >= ch) {
+        context.drawImage(preload, 0, 0, ch, ch);
+        context.translate( ch / 2, ch / 2 );
+        context.translate( -ch / 2 + cameraOffset.y, -ch / 2 + cameraOffset.y );
+        }
+        else {
+            context.drawImage(preload, 0, 0, cw, cw);
+            context.translate( cw / 2, cw / 2 );
+            context.translate( -cw / 2 + cameraOffset.x, -cw / 2 + cameraOffset.x );
+        }
     };
-    preload.src = "images/still.jpeg";
+    preload.src = "/images/still.png";
+   
+    
     
 
     const content = {
@@ -88,27 +121,12 @@
             playMusic();
         }
 
+
+
         
     },false);
 
-    window.addEventListener('resize', () => {
-        console.log('resized');
-        cw = window.innerWidth;
-        ch = window.innerHeight;
-        if (cw >= ch) {
-            console.log("landscape");
-            scale = ch;
-            draw(v,context,backcontext,scale);
-            playMusic();
-        }
-        else {
-            console.log("portrait");
-            scale = cw;
-            draw(v,context,backcontext,scale);
-            playMusic();
-        }
 
-    });
 
     v.addEventListener('pause', () => {
         pauseMusic();
@@ -151,7 +169,7 @@
         // Draw the pixels onto the visible canvas
         c.putImageData(idata,0,0);
         // Start over!
-        setTimeout(function(){ draw(v,c,bc,scale,scale); }, 0);
+        setTimeout(function(){ draw(v,c,bc,scale); }, 0);
     }
 
 

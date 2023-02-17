@@ -17,7 +17,13 @@ canvas {
     // height: 100%;
     z-index: -1;
     pointer-events: none;
+    right: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
 }
+
 
 #video {
     opacity: 0;
