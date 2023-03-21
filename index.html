@@ -1,42 +1,95 @@
 <!DOCTYPE html>
 <html>
   <head>
-    
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@300&display=swap" rel="stylesheet">
   </head>
   <body>
-    <ul id="ui">
-      <li><button onclick="prev()">PREVIOUS</button></li>
-      <li><button onclick="playVideo()">PLAY</button></li>
-      <li><button onclick="pauseVideo()">PAUSE</button></li>
-      <li><button onclick="next()">NEXT</button></li>
-    </ul>
+    <div id="ui">
+      <div id="radial-ui">
+        <div class="play-wrapper">
+        <button class="play" id="play-1" onclick="play1()">
+        </button>
+        </div>
+        <div class="play-wrapper" id="play-wrapper-2">
+        <button class="play" id="play-2" onclick="play2()">
 
-    <div id="text">
-      <h1>Notes on an archive</h1>
-      <p>        
-        When we return to a familiar moment in the past, the view widens as we grow ever more distant. New topologies form.</br>
-        Sometimes this shape gifts us deeper understanding, but sometimes we see something that was never real. </br>
-        There is nothing solid in sand.</br>
-        Maybe archiving is a way to remember that gives safe haven from the distorting flow of time. </br>
-        Archives shelter ephemera, and trace a familiar outline around the fragments within to give them form. Archives find a way to make sense of the past.</br>
-        This is how the archive becomes a stable location, to which we can look and reorient ourselves.</br>
-        It becomes a firm foundation from which we can take flight, because archiving is time travel.</br> 
-        When our drifting memories are transfigured into a fixed record, the archive becomes a place we can return to - even though we know there’s no way back.</br>
-        As the past prints the future into the present, this portal also goes forward. The archive is an object through which a message can be sent.</br>
-        Within a future, in all the din, there will be one more beacon.</br>
-        He was here, and I loved him.</br>
-      </p>
+        </button>
+        </div>
+        <div class="play-wrapper" id="play-wrapper-3">
+        <button class="play" id="play-3" onclick="play3()">
+
+        </button>
+        </div>
+        <div class="play-wrapper" id="play-wrapper-4">
+        <button class="play" id="play-4" onclick="play4()">
+
+        </button>
+        </div>
+        <div class="play-wrapper" id="play-wrapper-5">
+        <button class="play" id="play-5" onclick="play5()">
+
+        </button>
+        </div>
+        <div class="play-wrapper" id="play-wrapper-6">
+        <button class="play" id="play-6" onclick="play6()">
+
+        </button>
+        </div>
+        <div class="play-wrapper" id="play-wrapper-7">
+        <button class="play" id="play-7" onclick="play7()">
+
+        </button>
+        </div>
+
+        <button id="text-toggle" onclick="toggleText()">
+          <span class="icon icon-text"></span>
+        </button>
+
+      </div>
     </div>
-      <canvas id="c"></canvas>
+    <div id="text-modal" class="animate-toggle" onclick="toggleText()">
+      <div id="text">
+        <h1>Notes on an archive</h1>
+        <p>
+          When we return to a familiar moment in the past, the view widens as we
+          grow ever more distant. New topologies form.<br />
+          Sometimes this shape gifts us deeper understanding, but sometimes we
+          see something that was never real. <br />
+          There is nothing solid in sand.<br />
+          Maybe archiving is a way to remember that gives safe haven from the
+          distorting flow of time. <br />
+          Archives shelter ephemera, and trace a familiar outline around the
+          fragments within to give them form. Archives find a way to make sense
+          of the past.<br />
+          This is how the archive becomes a stable location, to which we can
+          look and reorient ourselves.<br />
+          It becomes a firm foundation from which we can take flight, because
+          archiving is time travel.<br />
+          When our drifting memories are transfigured into a fixed record, the
+          archive becomes a place we can return to - even though we know there's
+          no way back.<br />
+          As the past prints the future into the present, this portal also goes
+          forward. The archive is an object through which a message can be
+          sent.<br />
+          Within a future, in all the din, there will be one more beacon.<br />
+          He was here, and I loved him.<br />
+        </p>
+      </div>
+      <div id="modal-overlay"></div>
+    </div>
+    <canvas id="c"></canvas>
+    <div id="video-preloader">
+      <video width="300" loop muted id="video-prev"></video>
       <video width="300" loop muted id="video"></video>
       <video width="300" loop muted id="video-next"></video>
+    </div>
+    <div id="audio-preloader">
       <audio id="audio">HTML5 audio not supported</audio>
-      <!-- <img id="preload" src="images/still.jpeg"> -->
-      <script src="three.js"></script>
-      <script type="text/javascript" src="scripts.js"></script>
-      
-
-
+    </div>
+    <!-- <img id="preload" src="images/still.jpeg"> -->
+    <script type="text/javascript" src="scripts.js"></script>
   </body>
 </html>

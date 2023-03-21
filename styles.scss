@@ -1,20 +1,77 @@
-body {
+/* icomoon */
+
+@font-face {
+    font-family: "icomoon";
+    src: url("https://cdn.glitch.global/19b640fc-e8cf-4f26-b84c-a2bd42cf3d35/icomoon.eot?v=1679195553588");
+    src: url("https://cdn.glitch.global/19b640fc-e8cf-4f26-b84c-a2bd42cf3d35/icomoon.eot?v=1679195553588#iefix")
+        format("embedded-opentype"),
+      url("https://cdn.glitch.global/19b640fc-e8cf-4f26-b84c-a2bd42cf3d35/icomoon.ttf?v=1679196272122")
+        format("truetype"),
+      url("https://cdn.glitch.global/19b640fc-e8cf-4f26-b84c-a2bd42cf3d35/icomoon.woff?v=1679196280009")
+        format("woff"),
+      url("https://cdn.glitch.global/19b640fc-e8cf-4f26-b84c-a2bd42cf3d35/icomoon.svg?v=1679196264925")
+        format("svg");
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+  }
+  
+  [class^="icon-"],
+  [class*=" icon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: "icomoon" !important;
+    speak: never;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+  
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  .icon-text:before {
+    content: "\e900";
+  }
+  .icon-play:before {
+    content: "\e901";
+  }
+  .icon-prev:before {
+    content: "\e902";
+  }
+  .icon-next:before {
+    content: "\e903";
+  }
+  .icon-pause:before {
+    content: "\e904";
+  }
+  
+  html {
+    font-family: 'Alegreya Sans', sans-serif;
+    color: white;
+    font-size: 16px;
+    line-height: 1.5rem;
     width: 100vw;
     height: 100vh;
+  }
+  
+  body {
+    width: 100%;
+    height: 100%;
     background-color: black;
-    margin:0;
-    padding:0;
+    margin: 0;
+    padding: 0;
     position: absolute;
     top: 0;
     left: 0;
     overflow: hidden;
     display: block;
-}
-
-canvas {
+  }
+  
+  canvas {
     position: absolute;
-    // width: 100%;
-    // height: 100%;
     z-index: -1;
     pointer-events: none;
     right: 0;
@@ -22,26 +79,170 @@ canvas {
     top: 0;
     bottom: 0;
     margin: auto;
-}
-
-
-#video {
+  }
+  
+  #video-preloader {
     opacity: 0;
-}
-#preload {
+  }
+  
+  #preload {
     opacity: 0;
-}
+  }
+  
+  #ui {
 
-#ui {
+    z-index: 100;
     position: absolute;
-    top:20px;
-    left: 20px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .5);
     list-style-type: none;
     margin: 0;
     padding: 0;
-    z-index: 100;
-}
+    opacity: 0;
+    transform: translate3d(0, - 2rem, 0);
+    transition: 1s all ease-in-out;
 
-#text {
-    display: none;
-}
+    &:hover {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+
+  }
+  
+  #radial-ui {
+
+    z-index: 100;
+    position: relative;
+    aspect-ratio: 1 / 1;
+    width: 80vw;
+    max-width: 80vh;
+    margin: 0 auto;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+
+
+
+    button {
+        height: 20%;
+        aspect-ratio: 1 / 1;
+        border-radius: 50%;
+        -webkit-filter: grayscale(100%) blur(2px);
+        filter: grayscale(100%) blur(2px);
+        transition: .5s ease-in-out;
+        &:hover {
+            -webkit-filter: grayscale(0) blur(0);
+            filter: grayscale(0) blur(0);
+            transition: .5s ease-in-out;
+        }
+        background-size: contain;
+      }
+      .play-wrapper {
+        position: absolute;
+        height: calc(100%);
+
+        left: 40%;
+        }  
+        
+    #play-1 {
+        background-image: url('./images/button-1.png');
+        
+    }
+        
+    #play-wrapper-2 {
+        transform: rotate(51deg);
+    }
+    #play-2 {
+        transform: rotate(-51deg);
+        background-image: url('./images/button-2.png');
+        
+    }
+    #play-wrapper-3 {
+        transform: rotate(102deg);
+    }
+    #play-3 {
+        transform: rotate(-102deg);
+        background-image: url('./images/button-3.png');
+    }
+    #play-wrapper-4 {
+        transform: rotate(153deg);
+    }
+    #play-4 {
+        transform: rotate(-153deg);
+        background-image: url('./images/button-4.png');
+    }
+    #play-wrapper-5 {
+        transform: rotate(204deg);
+    }
+    #play-5 {
+        transform: rotate(-204deg);
+        background-image: url('./images/button-5.png');
+    }
+    #play-wrapper-6 {
+        transform: rotate(255deg);
+    }
+    #play-6 {
+        transform: rotate(-255deg);
+        background-image: url('./images/button-6.png');
+    }
+    #play-wrapper-7 {
+        transform: rotate(306deg);
+    }
+    #play-7 {
+        transform: rotate(-306deg);
+        background-image: url('./images/button-7.png');
+    }
+
+    #text-toggle {
+        position: absolute;
+        left: 40%;
+        top: 40%;
+        background-image: url('./images/text.png');
+      }
+
+
+  }
+  
+  
+  #text-modal {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    z-index: 101;
+    top: -100vh;
+    
+  }
+  
+  #text {
+    text-align: left;
+    height: 100%;
+    width: 100%;
+    overflow-y: scroll;
+    bottom: 0;
+    position: absolute;
+    z-index: 102;
+    h1 {
+        padding: 2rem 2rem 1rem 2rem;
+        line-height: 2rem;
+    }
+    p {
+        padding: 0 2rem 0 2rem;
+        
+    }
+  }
+  
+  #modal-overlay {
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: 0.75;
+    position: absolute;
+  }
+  
+  .animate-toggle {
+    transition: top 2s;
+  }
+  
