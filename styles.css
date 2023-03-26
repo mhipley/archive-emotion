@@ -44,7 +44,7 @@
 }
 
 html {
-  font-family: "Alegreya Sans", sans-serif;
+  font-family: "trade-gothic-next", sans-serif;
   color: white;
   font-size: 16px;
   line-height: 1.5rem;
@@ -206,9 +206,22 @@ canvas {
 #text h1 {
   padding: 2rem 2rem 1rem 2rem;
   line-height: 2rem;
+  font-weight: 700;
+  font-style: normal;
+  text-transform: uppercase;
 }
 #text p {
   padding: 0 2rem 0 2rem;
+  font-weight: 400;
+  font-style: normal;
+}
+#text br {
+  display: block;
+  /* makes it have a width */
+  content: "";
+  /* clears default height */
+  margin-top: 1rem;
+  /* change this to whatever height you want it */
 }
 
 #modal-overlay {

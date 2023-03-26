@@ -7,84 +7,112 @@ var context = canvas.getContext("2d");
 var back = document.createElement("canvas");
 var backcontext = back.getContext("2d");
 var cw, ch, scale;
-cw = window.innerWidth;
-ch = window.innerHeight;
-if (cw >= ch) {
-  canvas.width = ch;
-  canvas.height = ch;
-} else {
-  canvas.width = cw;
-  canvas.height = cw;
+
+function fitCanvas() {
+  cw = window.innerWidth;
+  ch = window.innerHeight;
+  
+  if (cw >= ch) {
+    canvas.width = ch;
+    canvas.height = ch;
+  } else {
+    canvas.width = cw;
+    canvas.height = cw;
+  }
 }
 
 window.addEventListener("resize", () => {
   console.log("resized");
-  cw = window.innerWidth;
-  ch = window.innerHeight;
+  fitCanvas();
 });
 
-let MAX_ZOOM = 1;
-let MIN_ZOOM = 1;
-let cameraOffset = { x: cw / 2, y: ch / 2 };
-var preload = new Image();
-preload.onload = function () {
-  context.scale(MIN_ZOOM, MIN_ZOOM);
-  if (cw >= ch) {
-    context.drawImage(preload, 0, 0, ch, ch);
-  } else {
-    context.drawImage(preload, 0, 0, cw, cw);
+fitCanvas();
+// let MAX_ZOOM = 1;
+// let MIN_ZOOM = 1;
+// let cameraOffset = { x: cw / 2, y: ch / 2 };
+// var preload = new Image();
+// preload.onload = function () {
+//   context.scale(MIN_ZOOM, MIN_ZOOM);
+//   context.drawImage(preload, 0, 0, canvas.width, canvas.height);
+// };
+// preload.src = "/images/still.png";
+
+
+function loadImage(v) {
+  fitCanvas();
+  if (v.paused) {
+    let MAX_ZOOM = 1;
+    let MIN_ZOOM = 1;
+    let cameraOffset = { x: cw / 2, y: ch / 2 };
+
+    context.scale(MIN_ZOOM, MIN_ZOOM);
+    context.drawImage(preload, 0, 0, canvas.width, canvas.height);
   }
-};
+  else {
+    return false;
+  }
+  
+
+  // Start over!
+  setTimeout(function () {
+    loadImage(v);
+  }, 0);
+
+}
+
+var preload = new Image();
 preload.src = "/images/still.png";
-    
+preload.onload = function () {
+  loadImage(v);
+};    
     
 
-    const content = {
-        songs: [
-            {
-               video: "videos/Video1.mp4",
-               audio: "audio/01.wav",
-               title: "Opening",
-               desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare libero vel erat facilisis facilisis. Aenean tempus augue ante, sit amet lacinia felis semper quis.",
-            },
-            {
-                video: "videos/Video2.mp4",
-                audio: "audio/02.wav",
-                title: "Dreams",
-                desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare libero vel erat facilisis facilisis. Aenean tempus augue ante, sit amet lacinia felis semper quis.",
-            },
-            {
-                video: "videos/Video3.mp4",
-                audio: "audio/03.wav",
-                title: "Home",
-                desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare libero vel erat facilisis facilisis. Aenean tempus augue ante, sit amet lacinia felis semper quis.",
-            },
-            {
-                video: "videos/Video4.mp4",
-                audio: "audio/04.wav",
-                title: "Rest Rework",
-                desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare libero vel erat facilisis facilisis. Aenean tempus augue ante, sit amet lacinia felis semper quis.",
-            },
-            {
-                video: "videos/Video5.mp4",
-                audio: "audio/05.wav",
-                title: "Gentle Night",
-                desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare libero vel erat facilisis facilisis. Aenean tempus augue ante, sit amet lacinia felis semper quis.",
-            },
-            {
-                video: "videos/Video5.mp4",
-                audio: "audio/06.wav",
-                title: "Lost in Time",
-                desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare libero vel erat facilisis facilisis. Aenean tempus augue ante, sit amet lacinia felis semper quis.",
-            },
-            {
-                video: "videos/Video6.mp4",
-                audio: "audio/07.wav",
-                title: "Rest",
-                desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare libero vel erat facilisis facilisis. Aenean tempus augue ante, sit amet lacinia felis semper quis.",
-            },
-        ]
-    }
+const content = {
+    songs: [
+        {
+            video: "videos/Video1.mp4",
+            audio: "audio/01.wav",
+            title: "Opening",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare libero vel erat facilisis facilisis. Aenean tempus augue ante, sit amet lacinia felis semper quis.",
+        },
+        {
+            video: "videos/Video2.mp4",
+            audio: "audio/02.wav",
+            title: "Dreams",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare libero vel erat facilisis facilisis. Aenean tempus augue ante, sit amet lacinia felis semper quis.",
+        },
+        {
+            video: "videos/Video3.mp4",
+            audio: "audio/03.wav",
+            title: "Home",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare libero vel erat facilisis facilisis. Aenean tempus augue ante, sit amet lacinia felis semper quis.",
+        },
+        {
+            video: "videos/Video4.mp4",
+            audio: "audio/04.wav",
+            title: "Rest Rework",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare libero vel erat facilisis facilisis. Aenean tempus augue ante, sit amet lacinia felis semper quis.",
+        },
+        {
+            video: "videos/Video5.mp4",
+            audio: "audio/05.wav",
+            title: "Gentle Night",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare libero vel erat facilisis facilisis. Aenean tempus augue ante, sit amet lacinia felis semper quis.",
+        },
+        {
+            video: "videos/Video5.mp4",
+            audio: "audio/06.wav",
+            title: "Lost in Time",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare libero vel erat facilisis facilisis. Aenean tempus augue ante, sit amet lacinia felis semper quis.",
+        },
+        {
+            video: "videos/Video6.mp4",
+            audio: "audio/07.wav",
+            title: "Rest",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare libero vel erat facilisis facilisis. Aenean tempus augue ante, sit amet lacinia felis semper quis.",
+        },
+    ]
+}
 
     // const initIndex = 0;
     // var curIndex = initIndex;
@@ -111,20 +139,13 @@ preload.src = "/images/still.png";
     // a.src = aFile;
     
 
+
     v.addEventListener(
       "play",
       () => {
-        if (cw >= ch) {
-          console.log("landscape");
-          scale = ch;
-          draw(v, context, backcontext, scale);
+          scale = canvas.width;
+          drawVideo(v, context, backcontext, scale);
           playMusic();
-        } else {
-          console.log("portrait");
-          scale = cw;
-          draw(v, context, backcontext, scale);
-          playMusic();
-        }
       },
       false
     );
@@ -145,16 +166,20 @@ preload.src = "/images/still.png";
       a.pause();
     }
     
-    function draw(v, c, bc, scale) {
-      canvas.width = scale;
-      canvas.height = scale;
-      back.width = scale;
-      back.height = scale;
+    function drawVideo(v, c, bc, scale) {
+      fitCanvas();
+      console.log(canvas.width);
+      // canvas.width = scale;
+      // canvas.height = scale;
+      back.width = canvas.width;
+      back.height = canvas.height;
       if (v.paused || v.ended) return false;
+
+      
       // First, draw it into the backing canvas
-      bc.drawImage(v, 0, 0, scale, scale);
+      bc.drawImage(v, 0, 0, canvas.width, canvas.height);
       // Grab the pixel data from the backing canvas
-      var idata = bc.getImageData(0, 0, scale, scale);
+      var idata = bc.getImageData(0, 0, canvas.width, canvas.height);
       var data = idata.data;
       // Loop through the pixels, turning them grayscale
       for (var i = 0; i < data.length; i += 4) {
@@ -171,7 +196,7 @@ preload.src = "/images/still.png";
       c.putImageData(idata, 0, 0);
       // Start over!
       setTimeout(function () {
-        draw(v, c, bc, scale);
+        drawVideo(v, c, bc, scale);
       }, 0);
     }
     
