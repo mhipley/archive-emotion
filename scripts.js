@@ -36,17 +36,29 @@ fitCanvas();
 //   context.drawImage(preload, 0, 0, canvas.width, canvas.height);
 // };
 // preload.src = "/images/still.png";
+let start = Date.now();
 
-
-function loadImage(v) {
+function loadImage(v, start) {
   fitCanvas();
   if (v.paused) {
     let MAX_ZOOM = 1;
-    let MIN_ZOOM = 1;
-    let cameraOffset = { x: cw / 2, y: ch / 2 };
+    let MIN_ZOOM = .01;
+    let now = Date.now();
+    let elapsed = now - start;
+    let multiplier = MIN_ZOOM + (elapsed/7000);
+    let zoom = 1;
+    if (multiplier <= 1) {
+      zoom = multiplier;
+    } else {
+      zoom = 1;
+    }
+    let scaledSize = canvas.width * zoom;
+    let margin = (canvas.width - scaledSize) / 2;
+    console.log(margin);
+    let cameraOffset = { x: margin, y: margin };
 
-    context.scale(MIN_ZOOM, MIN_ZOOM);
-    context.drawImage(preload, 0, 0, canvas.width, canvas.height);
+    context.scale(zoom, zoom);
+    context.drawImage(preload, cameraOffset.x, cameraOffset.y, canvas.width, canvas.height);
   }
   else {
     return false;
@@ -55,15 +67,15 @@ function loadImage(v) {
 
   // Start over!
   setTimeout(function () {
-    loadImage(v);
+    loadImage(v, start);
   }, 0);
 
 }
 
 var preload = new Image();
-preload.src = "/images/still.png";
+preload.src = "https://marthahipley.com/archive-emotion/images/still.png";
 preload.onload = function () {
-  loadImage(v);
+  loadImage(v, start);
 };    
     
 
@@ -168,9 +180,6 @@ const content = {
     
     function drawVideo(v, c, bc, scale) {
       fitCanvas();
-      console.log(canvas.width);
-      // canvas.width = scale;
-      // canvas.height = scale;
       back.width = canvas.width;
       back.height = canvas.height;
       if (v.paused || v.ended) return false;
