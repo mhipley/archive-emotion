@@ -5,7 +5,8 @@
     <link rel="stylesheet" href="https://use.typekit.net/gyn3oyz.css">
   </head>
   <body>
-    <div id="ui">
+    <button id="menu-toggle" onclick="toggleMenu()"></button>
+    <div id="ui" onclick="toggleMenu()"">
       <div id="radial-ui">
         <div class="play-wrapper">
         <button class="play" id="play-1" onclick="play1()">
@@ -79,6 +80,8 @@
       <div id="modal-overlay"></div>
     </div>
     <canvas id="c"></canvas>
+    <canvas id="l" class="lights"></canvas>
+    <canvas id="l-rev" class="lights flipped"></canvas>
     <div id="video-preloader">
       <video width="300" loop muted id="video-prev"></video>
       <video width="300" loop muted id="video"></video>

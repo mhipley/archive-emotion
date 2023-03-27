@@ -84,6 +84,15 @@ canvas {
   opacity: 0;
 }
 
+#menu-toggle {
+  height: 2rem;
+  width: 2rem;
+  background-color: transparent;
+  background-image: url("./images/dots.png");
+  background-size: contain;
+  border: none;
+}
+
 #ui {
   z-index: 100;
   position: absolute;
@@ -99,9 +108,16 @@ canvas {
   transform: translate3d(0, -2rem, 0);
   transition: 1s all ease-in-out;
 }
-#ui:hover {
+#ui.active {
   opacity: 1;
   transform: translate3d(0, 0, 0);
+}
+
+#menu-toggle {
+  z-index: 500;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
 }
 
 #radial-ui {
@@ -234,6 +250,22 @@ canvas {
 
 .animate-toggle {
   transition: top 2s;
+}
+
+canvas.lights {
+  filter: blur(15px) drop-shadow(0 0 30px #33b4ac);
+  transform-origin: 0 175%;
+  transform: skewX(25deg);
+  mix-blend-mode: normal;
+  transition: opacity 1s ease-in-out;
+  opacity: 0;
+}
+canvas.lights.active {
+  opacity: 1;
+}
+canvas.lights.flipped {
+  transform-origin: 0 320%;
+  transform: skewX(-25deg) scaleX(-1);
 }
 
 /*# sourceMappingURL=styles.css.map */
