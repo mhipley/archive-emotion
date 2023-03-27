@@ -89,8 +89,17 @@ canvas {
   width: 2rem;
   background-color: transparent;
   background-image: url("./images/dots.png");
-  background-size: contain;
+  background-size: cover;
   border: none;
+  z-index: 500;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  transform: rotate(0deg);
+  transition: 0.5s transform ease-in-out;
+}
+#menu-toggle:hover {
+  transform: rotate(180deg);
 }
 
 #ui {
@@ -107,17 +116,12 @@ canvas {
   opacity: 0;
   transform: translate3d(0, -2rem, 0);
   transition: 1s all ease-in-out;
+  pointer-events: none;
 }
 #ui.active {
   opacity: 1;
   transform: translate3d(0, 0, 0);
-}
-
-#menu-toggle {
-  z-index: 500;
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
+  pointer-events: all;
 }
 
 #radial-ui {
@@ -137,7 +141,7 @@ canvas {
   border-radius: 50%;
   -webkit-filter: grayscale(100%) blur(2px);
   filter: grayscale(100%) blur(2px);
-  transition: 0.5s ease-in-out;
+  transition: 0.5s all ease-in-out;
   background-size: contain;
 }
 #radial-ui button:hover {
@@ -257,7 +261,7 @@ canvas.lights {
   transform-origin: 0 175%;
   transform: skewX(25deg);
   mix-blend-mode: normal;
-  transition: opacity 1s ease-in-out;
+  transition: 1s all ease-in-out;
   opacity: 0;
 }
 canvas.lights.active {

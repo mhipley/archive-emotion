@@ -94,9 +94,17 @@
     width: 2rem;
     background-color: transparent;
     background-image: url('./images/dots.png');
-    background-size: contain;
+    background-size: cover;
     border: none;
-
+    z-index: 500;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    transform: rotate(0deg);
+    transition: .5s transform ease-in-out;
+    &:hover {
+        transform: rotate(180deg);
+    }
   }
   
   #ui {
@@ -114,20 +122,16 @@
     opacity: 0;
     transform: translate3d(0, - 2rem, 0);
     transition: 1s all ease-in-out;
+    pointer-events: none;
 
     &.active {
         opacity: 1;
         transform: translate3d(0, 0, 0);
+        pointer-events: all;
     }
 
   }
 
-  #menu-toggle {
-    z-index: 500;
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-  }
   
   #radial-ui {
 
@@ -149,7 +153,7 @@
         border-radius: 50%;
         -webkit-filter: grayscale(100%) blur(2px);
         filter: grayscale(100%) blur(2px);
-        transition: .5s ease-in-out;
+        transition: .5s all ease-in-out;
         &:hover {
             -webkit-filter: grayscale(0) blur(0);
             filter: grayscale(0) blur(0);
@@ -278,7 +282,7 @@ canvas.lights{
     transform-origin: 0 175%; 
     transform: skewX(25deg); 
     mix-blend-mode: normal;
-    transition: opacity 1s ease-in-out;
+    transition: 1s all ease-in-out;
     opacity: 0;
 
 
