@@ -126,14 +126,12 @@ canvas {
 
 #radial-ui {
   z-index: 100;
-  position: relative;
+  position: absolute;
   aspect-ratio: 1/1;
-  width: 80vw;
+  width: 60vw;
   max-width: 80vh;
-  margin: 0 auto;
-  top: 50%;
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
+  bottom: 2rem;
+  left: 20vw;
 }
 #radial-ui button {
   height: 20%;
@@ -258,7 +256,7 @@ canvas {
 
 canvas.lights {
   filter: blur(15px) drop-shadow(0 0 30px #33b4ac);
-  transform-origin: 0 175%;
+  transform-origin: 0 150vw;
   transform: skewX(25deg);
   mix-blend-mode: normal;
   transition: 1s all ease-in-out;
@@ -268,8 +266,12 @@ canvas.lights.active {
   opacity: 1;
 }
 canvas.lights.flipped {
-  transform-origin: 0 320%;
+  transform-origin: 0 280vw;
   transform: skewX(-25deg) scaleX(-1);
+}
+
+#cX {
+  display: none;
 }
 
 /*# sourceMappingURL=styles.css.map */
