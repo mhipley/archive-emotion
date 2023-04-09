@@ -113,7 +113,7 @@ canvas {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.75);
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -205,9 +205,12 @@ canvas {
 }
 #radial-ui #text-toggle {
   position: absolute;
-  left: 40%;
-  top: 40%;
+  height: 30%;
+  left: 35%;
+  top: 35%;
+  background: transparent;
   background-image: url("./images/text.png");
+  background-size: contain;
 }
 
 #text-modal {
