@@ -271,6 +271,7 @@ const content = {
       } else {
         x.style.top = "0px";
       }
+      typewriter.start();
     }
 
     function toggleMenu() {
@@ -827,3 +828,59 @@ document.body.addEventListener('mousemove', function (e) {
   mouseXPercentage = e.clientX / window.innerWidth;
   mouseYPercentage = e.clientY / window.innerHeight;
 })
+
+
+
+//typewriter
+
+var animatedText = document.getElementById('animated-text');
+
+var typewriter = new Typewriter(animatedText,
+  {
+    loop: false,
+    delay: 75
+  });
+
+typewriter.pauseFor(1000)
+  .typeString('Look back to a past moment and the view widens as we keep growing distant. A new topology forms.')
+  .pauseFor(1000)
+  .pasteString('<br>')
+  .typeString('Sometimes this shape gifts deeper understanding, but sometimes we see something that was never real.')
+  .pauseFor(1000)
+  .pasteString('<br>')
+  .typeString('There is nothing solid in sand.')
+  .pauseFor(1000)
+  .pasteString('<br>')
+  .typeString('Maybe archives can help us remember, and shelter our memories from the distorting flow of time.')
+  .pauseFor(1000)
+  .pasteString('<br>')
+  .typeString('Archives transfigure ephemera and trace an outline around the fragments within to give them familiar form.')
+  .pauseFor(1000)
+  .pasteString('<br>')
+  .typeString('This is how the archive becomes a stable location. A firm foundation - from which we can take flight.')
+  .pauseFor(1000)
+  .pasteString('<br>')
+  .typeString('Because archiving is time travel.')
+  .pauseFor(1000)
+  .pasteString('<br>')
+  .typeString("By holding our memories in time, the archive is a place we can return to - even though there's no way back.")
+  .pauseFor(1000)
+  .pasteString('<br>')
+  .typeString('As the past prints the future into the present, this portal also goes forward.')
+  .pauseFor(1000)
+  .pasteString('<br>')
+  .typeString('The archive is an object through which a message can be sent.')
+  .pauseFor(1000)
+  .pasteString('<br>')
+  .typeString('Within a future, and in all the din, one more beacon.')
+  .pauseFor(1000)
+  .pasteString('<br>')
+  .typeString('He was here, and I loved him.');
+
+
+      //skip text animation
+      function fwdText() {
+        document.getElementById( 'animated-text' ).style.display = 'none';
+        document.getElementById( 'screen-reader' ).style.display = 'block';
+        document.getElementById( 'forward' ).style.display = 'none';
+      }

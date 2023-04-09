@@ -3,6 +3,7 @@
   <head>
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="https://use.typekit.net/gyn3oyz.css">
+    <script src="https://unpkg.com/typewriter-effect@latest/dist/core.js"></script>
   </head>
   <body>
     <button id="menu-toggle" onclick="toggleMenu()"></button>
@@ -49,10 +50,12 @@
 
       </div>
     </div>
-    <div id="text-modal" class="animate-toggle" onclick="toggleText()">
+    <div id="text-modal" class="animate-toggle">
+      <div id="text-close" onclick="toggleText()"><span class="icon icon-close"></span></div>
       <div id="text">
         <h1>Notes on an archive</h1>
-        <p>
+        <div id="animated-text"></div>
+        <p id="screen-reader">
           Look back to a past moment and the view widens as we keep growing distant. A new topology forms.<br />
           Sometimes this shape gifts deeper understanding, but sometimes we see something that was never real.<br />
           There is nothing solid in sand.<br />
@@ -66,6 +69,7 @@
           Within a future, and in all the din, one more beacon.<br />
           He was here, and I loved him.<br />
         </p>
+        <span class="icon icon-next" onclick="fwdText()" id="forward"></span>
       </div>
       <div id="modal-overlay"></div>
     </div>

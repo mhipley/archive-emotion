@@ -2,15 +2,11 @@
 
 @font-face {
     font-family: "icomoon";
-    src: url("https://cdn.glitch.global/19b640fc-e8cf-4f26-b84c-a2bd42cf3d35/icomoon.eot?v=1679195553588");
-    src: url("https://cdn.glitch.global/19b640fc-e8cf-4f26-b84c-a2bd42cf3d35/icomoon.eot?v=1679195553588#iefix")
-        format("embedded-opentype"),
-      url("https://cdn.glitch.global/19b640fc-e8cf-4f26-b84c-a2bd42cf3d35/icomoon.ttf?v=1679196272122")
-        format("truetype"),
-      url("https://cdn.glitch.global/19b640fc-e8cf-4f26-b84c-a2bd42cf3d35/icomoon.woff?v=1679196280009")
-        format("woff"),
-      url("https://cdn.glitch.global/19b640fc-e8cf-4f26-b84c-a2bd42cf3d35/icomoon.svg?v=1679196264925")
-        format("svg");
+    src:  url('fonts/icomoon.eot?1nrm9o');
+    src:  url('fonts/icomoon.eot?1nrm9o#iefix') format('embedded-opentype'),
+      url('fonts/icomoon.ttf?1nrm9o') format('truetype'),
+      url('fonts/icomoon.woff?1nrm9o') format('woff'),
+      url('fonts/icomoon.svg?1nrm9o#icomoon') format('svg');
     font-weight: normal;
     font-style: normal;
     font-display: block;
@@ -32,6 +28,9 @@
     -moz-osx-font-smoothing: grayscale;
   }
   
+  .icon-close:before {
+    content: "\e905";
+  }
   .icon-text:before {
     content: "\e900";
   }
@@ -131,7 +130,6 @@
     }
 
   }
-
   
   #radial-ui {
 
@@ -232,19 +230,25 @@
     position: absolute;
     width: 100vw;
     height: 100vh;
-    z-index: 101;
+    z-index: 501;
     top: -100vh;
-    
+
+    #text-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      z-index: 504;
+    }
   }
   
   #text {
     text-align: left;
     height: 100%;
     width: 100%;
-    overflow-y: scroll;
+    overflow-y: auto;
     bottom: 0;
     position: absolute;
-    z-index: 102;
+    z-index: 502;
     h1 {
         padding: 2rem 2rem 1rem 2rem;
         line-height: 2rem;
@@ -256,12 +260,20 @@
         padding: 0 2rem 0 2rem;
         font-weight: 400;
         font-style: normal;
+        display: none;
         
     }
     br {
         display: block; /* makes it have a width */
         content: ""; /* clears default height */
         margin-top: 1rem; /* change this to whatever height you want it */
+    }
+    #animated-text {
+      padding: 0 2rem 1rem 2rem;
+    }
+
+    #forward {
+      padding: 0 2rem 0 2rem;
     }
   }
   
