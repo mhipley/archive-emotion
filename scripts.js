@@ -9,6 +9,8 @@ var back = document.createElement("canvas");
 var backcontext = back.getContext("2d");
 var transCanvas = document.getElementById("cX");
 var cXcontext = transCanvas.getContext("2d");
+var audioContext = new AudioContext();
+var audioSrc = audioContext.createMediaElementSource(a);
 
 var cw, ch, cx, scale;
 
@@ -17,13 +19,20 @@ function fitCanvas() {
   ch = window.innerHeight;
   
   if (cw >= ch) {
-    canvas.width = ch;
+    canvas.width = cw;
     canvas.height = ch;
+    transCanvas.width = cw;
+    transCanvas.height = ch;
+    scale = canvas.height;
   } else {
     canvas.width = cw;
     canvas.height = cw;
+    transCanvas.width = cw;
+    transCanvas.height = cw;
+    scale = canvas.width;
   }
 }
+
 
 function cloneLights(lightsCanvas) {
 
@@ -40,24 +49,6 @@ function cloneLights(lightsCanvas) {
 
   //return the new canvas
   return newCanvas;
-}
-
-function cloneVideo(videoCanvas) {
-  //create a new canvas
-  var newVideo = document.getElementById("cX");
-  var context = newVideo.getContext('2d');
-
-
-  //set dimensions
-  newVideo.width = videoCanvas.width;
-  newVideo.height = videoCanvas.height;
-
-  //apply the old canvas to the new one
-  context.drawImage(videoCanvas, 0, 0);
-
-  //return the new canvas
-  return newVideo;
-
 }
 
 window.addEventListener("resize", () => {
@@ -85,9 +76,17 @@ function loadImage(v, start) {
     }
     let scaledSize = canvas.width * zoom;
     let margin = ((canvas.width - scaledSize) / 2)/zoom;
-    let cameraOffset = { x: margin, y: margin };
+    var bumper;
+    if (cw >= ch) {
+      bumper = (canvas.width - canvas.height)/2;
+    } else {
+      bumper = (canvas.height - canvas.width)/2;
+    }
+
+    
+    let cameraOffset = { x: (margin + bumper), y: margin };
     context.scale(zoom, zoom);
-    context.drawImage(preload, cameraOffset.x, cameraOffset.y, canvas.width, canvas.height);
+    context.drawImage(preload, cameraOffset.x, cameraOffset.y, canvas.height, canvas.height);
   }
   else {
     return false;
@@ -165,9 +164,22 @@ const content = {
     v.addEventListener(
       "play",
       () => {
+
+        if (cw >= ch) {
+          scale = canvas.height;
+          console.log(scale);
+        } else {
           scale = canvas.width;
-          drawVideo(v, context, backcontext, scale, cXcontext);
-          // drawVideoSwap(v, cXcontext, cXbcontext, scale);
+        }
+
+          
+        
+          analyser = audioContext.createAnalyser();
+          audioSrc.connect(analyser);
+          analyser.connect(audioContext.destination);
+          analyser.fftSize = 32;
+          drawVideo(v, context, backcontext, cXcontext);
+          audioContext.resume();
           playMusic();
       },
       false
@@ -189,37 +201,67 @@ const content = {
       a.pause();
     }
     
-    function drawVideo(v, c, bc, scale, cx) {
+    function drawVideo(v, c, bc, cx, a) {
+
       fitCanvas();
+      scale = canvas.height;
+
       cloneLights(lightsCanvas);
+
+      // audio analyser
+      const bufferLength = analyser.frequencyBinCount;
+      const dataArray = new Uint8Array(bufferLength);
+      analyser.getByteFrequencyData(dataArray);
+
+      maxOffset = canvas.width/4;
+
+      function convertRange( value, r1, r2 ) { 
+        return ( value - r1[ 0 ] ) * ( r2[ 1 ] - r2[ 0 ] ) / ( r1[ 1 ] - r1[ 0 ] ) + r2[ 0 ];
+      }
+
+      var offset = convertRange(dataArray[0], [0, 300], [0 , maxOffset]);
+
+      console.log(offset);
+            
       
       back.width = canvas.width;
       back.height = canvas.height;
       if (v.paused || v.ended) return false;
 
+      var bumper;
+      if (cw >= ch) {
+        bumper = (canvas.width - canvas.height)/2;
+      } else {
+        bumper = (canvas.height - canvas.width)/2;
+      }
+
       
       // First, draw it into the backing canvases
-      bc.drawImage(v, 0, 0, canvas.width, canvas.height);
+      bc.drawImage(v, 0, 0, scale, scale);
       // Grab the pixel data from the backing canvas
-      var idata = bc.getImageData(0, 0, canvas.width, canvas.height);
+      var idata = bc.getImageData(0, 0, scale, scale);
       var data = idata.data;
+      var glitchData = idata.data;
       // Loop through the pixels, turning them grayscale
-      for (var i = 0; i < data.length; i += 4) {
-        // var r = data[i];
-        // var g = data[i+1];
-        // var b = data[i+2];
+      for (var i = 0; i < glitchData.length; i += 4) {
+        // var r = glitchData[i];
+        // var g = glitchData[i+1];
+        // var b = glitchData[i+2];
         // var brightness = (3*r+4*g+b)>>>3;
-        // data[i] = brightness;
-        // data[i+1] = brightness;
-        // data[i+2] = brightness;
+        // glitchData[i] = brightness;
+        // glitchData[i+1] = brightness;
+        // glitchData[i+2] = brightness;
       }
       idata.data = data;
       // Draw the pixels onto the visible canvas
-      c.putImageData(idata, 0, 0);
+      c.putImageData(idata, (bumper + offset), 0);
+      cx.putImageData(idata, (bumper - offset), 0);
+
+
       
       // Start over!
       setTimeout(function () {
-        drawVideo(v, c, bc, scale, cx);
+        drawVideo(v, c, bc, cx);
       }, 0);
     }
 
@@ -289,6 +331,9 @@ const content = {
         var y = document.getElementById("l-rev");
         y.classList.add("active");
         y.style.mixBlendMode = content.songs[0].blendMode;
+
+        
+
     }
     
 
@@ -828,6 +873,8 @@ document.body.addEventListener('mousemove', function (e) {
   mouseXPercentage = e.clientX / window.innerWidth;
   mouseYPercentage = e.clientY / window.innerHeight;
 })
+
+
 
 
 

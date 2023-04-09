@@ -293,7 +293,7 @@ canvas.lights.flipped {
 }
 
 #cX {
-  display: none;
+  mix-blend-mode: lighten;
 }
 
 /*# sourceMappingURL=styles.css.map */
