@@ -167,7 +167,7 @@ const content = {
 
         if (cw >= ch) {
           scale = canvas.height;
-          console.log(scale);
+
         } else {
           scale = canvas.width;
         }
@@ -213,16 +213,17 @@ const content = {
       const dataArray = new Uint8Array(bufferLength);
       analyser.getByteFrequencyData(dataArray);
 
+      const waveArray = new Float32Array(bufferLength);
+      analyser.getFloatTimeDomainData(waveArray);
+      console.log(waveArray);
+
       maxOffset = canvas.width/4;
 
       function convertRange( value, r1, r2 ) { 
         return ( value - r1[ 0 ] ) * ( r2[ 1 ] - r2[ 0 ] ) / ( r1[ 1 ] - r1[ 0 ] ) + r2[ 0 ];
       }
+      var offset = convertRange(waveArray[0], [0, 1], [0 , maxOffset]);
 
-      var offset = convertRange(dataArray[0], [0, 300], [0 , maxOffset]);
-
-      console.log(offset);
-            
       
       back.width = canvas.width;
       back.height = canvas.height;
