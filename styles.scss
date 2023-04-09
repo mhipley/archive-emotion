@@ -98,8 +98,8 @@
     border: none;
     z-index: 500;
     position: absolute;
-    top: 1rem;
-    right: 1rem;
+    bottom: 2rem;
+    left: calc(50% - 1rem);
     transform: rotate(0deg);
     transition: .5s transform ease-in-out;
     &:hover {
@@ -136,12 +136,14 @@
   #radial-ui {
 
     z-index: 100;
-    position: absolute;
+    position: relative;
     aspect-ratio: 1 / 1;
     width: 60vw;
     max-width: 80vh;
-    bottom: 2rem;
-    left: 20vw;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    margin: 0 auto;
 
 
 

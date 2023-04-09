@@ -9,10 +9,8 @@ var back = document.createElement("canvas");
 var backcontext = back.getContext("2d");
 var transCanvas = document.getElementById("cX");
 var cXcontext = transCanvas.getContext("2d");
-var cXback = document.createElement("canvas");
-var cXbcontext = back.getContext("2d");
 
-var cw, ch, scale;
+var cw, ch, cx, scale;
 
 function fitCanvas() {
   cw = window.innerWidth;
@@ -41,7 +39,25 @@ function cloneLights(lightsCanvas) {
   context.drawImage(lightsCanvas, 0, 0);
 
   //return the new canvas
-  return lightsCanvas;
+  return newCanvas;
+}
+
+function cloneVideo(videoCanvas) {
+  //create a new canvas
+  var newVideo = document.getElementById("cX");
+  var context = newVideo.getContext('2d');
+
+
+  //set dimensions
+  newVideo.width = videoCanvas.width;
+  newVideo.height = videoCanvas.height;
+
+  //apply the old canvas to the new one
+  context.drawImage(videoCanvas, 0, 0);
+
+  //return the new canvas
+  return newVideo;
+
 }
 
 window.addEventListener("resize", () => {
@@ -150,7 +166,7 @@ const content = {
       "play",
       () => {
           scale = canvas.width;
-          drawVideo(v, context, backcontext, scale);
+          drawVideo(v, context, backcontext, scale, cXcontext);
           // drawVideoSwap(v, cXcontext, cXbcontext, scale);
           playMusic();
       },
@@ -173,9 +189,10 @@ const content = {
       a.pause();
     }
     
-    function drawVideo(v, c, bc, scale) {
+    function drawVideo(v, c, bc, scale, cx) {
       fitCanvas();
       cloneLights(lightsCanvas);
+      
       back.width = canvas.width;
       back.height = canvas.height;
       if (v.paused || v.ended) return false;
@@ -199,43 +216,13 @@ const content = {
       idata.data = data;
       // Draw the pixels onto the visible canvas
       c.putImageData(idata, 0, 0);
-      // Start over!
-      setTimeout(function () {
-        drawVideo(v, c, bc, scale);
-      }, 0);
-    }
-
-    function drawVideoSwap(v, c, bc, scale) {
-      fitCanvas();
-      cloneLights(lightsCanvas);
-      back.width = canvas.width;
-      back.height = canvas.height;
-      if (v.paused || v.ended) return false;
-
       
-      // First, draw it into the backing canvases
-      bc.drawImage(v, 0, 0, canvas.width, canvas.height);
-      // Grab the pixel data from the backing canvas
-      var idata = bc.getImageData(0, 0, canvas.width, canvas.height);
-      var data = idata.data;
-      // Loop through the pixels, turning them grayscale
-      for (var i = 0; i < data.length; i += 4) {
-        var r = data[i];
-        var g = data[i+1];
-        var b = data[i+2];
-        var brightness = (3*r+4*g+b)>>>3;
-        data[i] = brightness;
-        data[i+1] = brightness;
-        data[i+2] = brightness;
-      }
-      idata.data = data;
-      // Draw the pixels onto the visible canvas
-      c.putImageData(idata, 0, 0);
       // Start over!
       setTimeout(function () {
-        drawVideoSwap(v, c, bc, scale);
+        drawVideo(v, c, bc, scale, cx);
       }, 0);
     }
+
     
     // function playVideo() {
     //   v.play();
