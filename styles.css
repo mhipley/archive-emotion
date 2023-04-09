@@ -277,14 +277,10 @@ canvas {
 }
 
 canvas.lights {
-  filter: blur(15px) drop-shadow(0 0 30px #33b4ac);
   transform: translateX(-30vw);
   mix-blend-mode: normal;
   transition: 1s all ease-in-out;
   opacity: 0;
-}
-canvas.lights.active {
-  opacity: 1;
 }
 canvas.lights.flipped {
   transform: translateX(30vw) scaleX(-1);

@@ -11,6 +11,7 @@ var transCanvas = document.getElementById("cX");
 var cXcontext = transCanvas.getContext("2d");
 var audioContext = new AudioContext();
 var audioSrc = audioContext.createMediaElementSource(a);
+var active = 0;
 
 var cw, ch, cx, scale;
 
@@ -112,20 +113,29 @@ const content = {
         {
             video: "videos/Video1.mp4",
             blendMode: "screen",
+            filter: "blur(15px) drop-shadow(0 0 30px rgba(51,180,172,1)",
             audio: "audio/01.wav",
+            baseColor: "rgb(255, 200, 220)",
+            opacity: "1",
             title: "Opening",
             desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare libero vel erat facilisis facilisis. Aenean tempus augue ante, sit amet lacinia felis semper quis.",
         },
         {
             video: "videos/Video2.mp4",
-            blendMode: "plus-lighter",
+            blendMode: "screen",
+            filter: "blur(15px) drop-shadow(0 0 30px #e47e30) hue-rotate(210deg)",
+            baseColor: "rgb(255, 200, 220)",
+            opacity: "1",
             audio: "audio/02.wav",
             title: "Dreams",
             desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare libero vel erat facilisis facilisis. Aenean tempus augue ante, sit amet lacinia felis semper quis.",
         },
         {
             video: "videos/Video3.mp4",
-            blendMode: "luminosity",
+            blendMode: "screen",
+            filter: "blur(15px) drop-shadow(0 0 30px #33B4AC) hue-rotate(45deg)",
+            baseColor: "rgb(255, 200, 220)",
+            opacity: "1",
             audio: "audio/03.wav",
             title: "Home",
             desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare libero vel erat facilisis facilisis. Aenean tempus augue ante, sit amet lacinia felis semper quis.",
@@ -133,20 +143,29 @@ const content = {
         {
             video: "videos/Video4.mp4",
             blendMode: "hard-light",
+            filter: "blur(15px) drop-shadow(0 0 30px rgba(51,180,172,1)",
+            baseColor: "rgb(255, 200, 220)",
+            opacity: "1",
             audio: "audio/04.wav",
             title: "Rest Rework",
             desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare libero vel erat facilisis facilisis. Aenean tempus augue ante, sit amet lacinia felis semper quis.",
         },
         {
             video: "videos/Video7.mp4",
-            blendMode: "difference",
+            blendMode: "screen",
+            filter: "blur(15px) drop-shadow(0 0 30px #A7FFFA) hue-rotate(45deg)",
+            baseColor: "rgb(255, 200, 220)",
+            opacity: "1",
             audio: "audio/05.wav",
             title: "Gentle Night",
             desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare libero vel erat facilisis facilisis. Aenean tempus augue ante, sit amet lacinia felis semper quis.",
         },
         {
             video: "videos/Video5.mp4",
-            blendMode: "color-dodge",
+            blendMode: "screen",
+            filter: "blur(15px) drop-shadow(0 0 30px #A7FFFA) hue-rotate(45deg)",
+            baseColor: "rgb(255, 200, 220)",
+            opacity: "1",
             audio: "audio/06.wav",
             title: "Lost in Time",
             desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare libero vel erat facilisis facilisis. Aenean tempus augue ante, sit amet lacinia felis semper quis.",
@@ -154,6 +173,9 @@ const content = {
         {
             video: "videos/Video6.mp4",
             blendMode: "normal",
+            filter: "blur(15px) drop-shadow(0 0 30px rgba(51,180,172,1)",
+            baseColor: "rgb(255, 200, 220)",
+            opacity: ".5",
             audio: "audio/07.wav",
             title: "Rest",
             desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare libero vel erat facilisis facilisis. Aenean tempus augue ante, sit amet lacinia felis semper quis.",
@@ -283,18 +305,21 @@ const content = {
     }
 
     function play1() {
+        active = 0;
         v.src = content.songs[0].video;
         a.src = content.songs[0].audio;
         v.play();
         var x = document.getElementById("l");
         x.classList.add("active");
         x.style.mixBlendMode = content.songs[0].blendMode;
+        x.style.filter = content.songs[0].filter;
+        x.style.opacity = content.songs[0].opacity;
         var y = document.getElementById("l-rev");
         y.classList.add("active");
         y.style.mixBlendMode = content.songs[0].blendMode;
-
-        
-
+        y.style.filter = content.songs[0].filter;      
+        y.style.opacity = content.songs[0].opacity;
+        y.style.opacity = content.songs[0].opacity;
     }
     
 
@@ -305,9 +330,13 @@ const content = {
         var x = document.getElementById("l");
         x.classList.add("active");
         x.style.mixBlendMode = content.songs[1].blendMode;
+        x.style.filter = content.songs[1].filter;
+        x.style.opacity = content.songs[1].opacity;
         var y = document.getElementById("l-rev");
         y.classList.add("active");
         y.style.mixBlendMode = content.songs[1].blendMode;
+        y.style.filter = content.songs[1].filter;
+        y.style.opacity = content.songs[1].opacity;
     }
     
 
@@ -318,9 +347,13 @@ const content = {
         var x = document.getElementById("l");
         x.classList.add("active");
         x.style.mixBlendMode = content.songs[2].blendMode;
+        x.style.filter = content.songs[2].filter;
+        x.style.opacity = content.songs[2].opacity;
         var y = document.getElementById("l-rev");
         y.classList.add("active");
         y.style.mixBlendMode = content.songs[2].blendMode;
+        y.style.filter = content.songs[2].filter;
+        y.style.opacity = content.songs[2].opacity;
     }
     
     function play4() {
@@ -330,9 +363,13 @@ const content = {
         var x = document.getElementById("l");
         x.classList.add("active");
         x.style.mixBlendMode = content.songs[3].blendMode;
+        x.style.filter = content.songs[3].filter;
+        x.style.opacity = content.songs[3].opacity;
         var y = document.getElementById("l-rev");
         y.classList.add("active");
         y.style.mixBlendMode = content.songs[3].blendMode;
+        y.style.filter = content.songs[3].filter;
+        y.style.opacity = content.songs[3].opacity;
     }
 
     function play5() {
@@ -342,9 +379,13 @@ const content = {
         var x = document.getElementById("l");
         x.classList.add("active");
         x.style.mixBlendMode = content.songs[4].blendMode;
+        x.style.filter = content.songs[4].filter;
+        x.style.opacity = content.songs[4].opacity;
         var y = document.getElementById("l-rev");
         y.classList.add("active");
         y.style.mixBlendMode = content.songs[4].blendMode;
+        y.style.filter = content.songs[4].filter;
+        y.style.opacity = content.songs[4].opacity;
     }
 
     function play6() {
@@ -354,9 +395,13 @@ const content = {
         var x = document.getElementById("l");
         x.classList.add("active");
         x.style.mixBlendMode = content.songs[5].blendMode;
+        x.style.filter = content.songs[5].filter;
+        x.style.opacity = content.songs[5].opacity;
         var y = document.getElementById("l-rev");
         y.classList.add("active");
         y.style.mixBlendMode = content.songs[5].blendMode;
+        y.style.filter = content.songs[5].filter;
+        y.style.opacity = content.songs[5].opacity;
     }
 
     function play7() {
@@ -366,9 +411,13 @@ const content = {
         var x = document.getElementById("l");
         x.classList.add("active");
         x.style.mixBlendMode = content.songs[6].blendMode;
+        x.style.filter = content.songs[6].filter;
+        x.style.opacity = content.songs[6].opacity;
         var y = document.getElementById("l-rev");
         y.classList.add("active");
         y.style.mixBlendMode = content.songs[6].blendMode;
+        y.style.filter = content.songs[6].filter;
+        y.style.opacity = content.songs[6].opacity;
     }
     
 
@@ -506,7 +555,7 @@ var Curve = function (vpX, vpY, vpZ, epX, epY, epZ, brushCount, maxBrushAlpha, f
       new Brush(
         this,
         (i / this.brushCount) * (this.endPoint.z - this.vanishingPoint.z) + this.vanishingPoint.z,
-        noScale ? "rgb(200, 200, 220)" : fill || null,
+        noScale ? "rgb(255, 200, 220)" : fill || null,
         noScale
       )
     );
