@@ -139,7 +139,7 @@ const content = {
             desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare libero vel erat facilisis facilisis. Aenean tempus augue ante, sit amet lacinia felis semper quis.",
         },
         {
-            video: "videos/Video5.mp4",
+            video: "videos/Video7.mp4",
             blendMode: "difference",
             audio: "audio/05.wav",
             title: "Gentle Night",
