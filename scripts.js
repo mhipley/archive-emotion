@@ -895,7 +895,7 @@ var animatedText = document.getElementById('animated-text');
 var typewriter = new Typewriter(animatedText,
   {
     loop: false,
-    delay: 75
+    delay: 50
   });
 
 typewriter.pauseFor(1000)
