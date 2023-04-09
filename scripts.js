@@ -210,12 +210,11 @@ const content = {
 
       // audio analyser
       const bufferLength = analyser.frequencyBinCount;
-      const dataArray = new Uint8Array(bufferLength);
-      analyser.getByteFrequencyData(dataArray);
+      const freqArray = new Uint8Array(bufferLength);
+      analyser.getByteFrequencyData(freqArray);
 
       const waveArray = new Float32Array(bufferLength);
       analyser.getFloatTimeDomainData(waveArray);
-      console.log(waveArray);
 
       maxOffset = canvas.width/4;
 
@@ -266,45 +265,6 @@ const content = {
       }, 0);
     }
 
-    
-    // function playVideo() {
-    //   v.play();
-    // }
-    
-    // function pauseVideo() {
-    //   v.pause();
-    // }
-    
-    // function next() {
-    //   if (curIndex <= 5) {
-    //     curIndex = curIndex + 1;
-    //   } else {
-    //     curIndex = 0;
-    //   }
-    
-    //   console.log(curIndex);
-    //   var song = content.songs[curIndex];
-    //   var aFile = song.audio;
-    //   var vFile = song.video;
-    //   v.src = vFile;
-    //   a.src = aFile;
-    //   v.play();
-    // }
-    
-    // function prev() {
-    //   if (curIndex > 0) {
-    //     curIndex = curIndex - 1;
-    //   } else {
-    //     curIndex = 6;
-    //   }
-    
-    //   var song = content.songs[curIndex];
-    //   var aFile = song.audio;
-    //   var vFile = song.video;
-    //   v.src = vFile;
-    //   a.src = aFile;
-    //   v.play();
-    // }
     
     //toggle display of text modal
     function toggleText() {
