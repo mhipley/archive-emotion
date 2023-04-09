@@ -295,8 +295,7 @@
   
 canvas.lights{
     filter: blur(15px) drop-shadow(0 0 30px rgba(51,180,172,1)); 
-    transform-origin: 0 150vw; 
-    transform: skewX(25deg); 
+    transform: translateX(50vw);
     mix-blend-mode: normal;
     transition: 1s all ease-in-out;
     opacity: 0;
