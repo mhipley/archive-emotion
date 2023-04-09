@@ -119,6 +119,7 @@ const content = {
             opacity: "1",
             title: "Opening",
             desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare libero vel erat facilisis facilisis. Aenean tempus augue ante, sit amet lacinia felis semper quis.",
+            maxOffset: 0
         },
         {
             video: "videos/Video2.mp4",
@@ -129,6 +130,7 @@ const content = {
             audio: "audio/02.wav",
             title: "Dreams",
             desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare libero vel erat facilisis facilisis. Aenean tempus augue ante, sit amet lacinia felis semper quis.",
+            maxOffset: 0
         },
         {
             video: "videos/Video3.mp4",
@@ -139,6 +141,7 @@ const content = {
             audio: "audio/03.wav",
             title: "Home",
             desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare libero vel erat facilisis facilisis. Aenean tempus augue ante, sit amet lacinia felis semper quis.",
+            maxOffset: 0
         },
         {
             video: "videos/Video4.mp4",
@@ -149,6 +152,7 @@ const content = {
             audio: "audio/04.wav",
             title: "Rest Rework",
             desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare libero vel erat facilisis facilisis. Aenean tempus augue ante, sit amet lacinia felis semper quis.",
+            maxOffset: 1
         },
         {
             video: "videos/Video7.mp4",
@@ -159,6 +163,7 @@ const content = {
             audio: "audio/05.wav",
             title: "Gentle Night",
             desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare libero vel erat facilisis facilisis. Aenean tempus augue ante, sit amet lacinia felis semper quis.",
+            maxOffset: 0
         },
         {
             video: "videos/Video5.mp4",
@@ -169,6 +174,7 @@ const content = {
             audio: "audio/06.wav",
             title: "Lost in Time",
             desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare libero vel erat facilisis facilisis. Aenean tempus augue ante, sit amet lacinia felis semper quis.",
+            maxOffset: 0
         },
         {
             video: "videos/Video6.mp4",
@@ -179,6 +185,7 @@ const content = {
             audio: "audio/07.wav",
             title: "Rest",
             desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare libero vel erat facilisis facilisis. Aenean tempus augue ante, sit amet lacinia felis semper quis.",
+            maxOffset: 0
         },
     ]
 }
@@ -238,14 +245,31 @@ const content = {
       const waveArray = new Float32Array(bufferLength);
       analyser.getFloatTimeDomainData(waveArray);
 
-      maxOffset = canvas.width/4;
+      console.log(active);
+      console.log(content.songs[active].maxOffset);
 
+      console.log(content.songs[active].maxOffset);
+
+      var maximum;
+
+      if (content.songs[active].maxOffset === 0 )
+      {
+        maximum = 10;
+
+      } else {
+        maximum = canvas.width/4;
+      }
+
+      console.log(maximum);
+
+    
       function convertRange( value, r1, r2 ) { 
         return ( value - r1[ 0 ] ) * ( r2[ 1 ] - r2[ 0 ] ) / ( r1[ 1 ] - r1[ 0 ] ) + r2[ 0 ];
       }
-      var offset = convertRange(waveArray[0], [0, 1], [0 , maxOffset]);
+      var offset = convertRange(waveArray[0], [0, 1], [0 , maximum]);
 
-      
+      console.log(offset);
+
       back.width = canvas.width;
       back.height = canvas.height;
       if (v.paused || v.ended) return false;
@@ -324,6 +348,7 @@ const content = {
     
 
     function play2() {
+        active = 1;
         v.src = content.songs[1].video;
         a.src = content.songs[1].audio;
         v.play();
@@ -341,6 +366,7 @@ const content = {
     
 
     function play3() {
+        active = 2;
         v.src = content.songs[2].video;
         a.src = content.songs[2].audio;
         v.play();
@@ -357,6 +383,7 @@ const content = {
     }
     
     function play4() {
+      active = 3;
         v.src = content.songs[3].video;
         a.src = content.songs[3].audio;
         v.play();
@@ -373,6 +400,7 @@ const content = {
     }
 
     function play5() {
+      active = 4;
         v.src = content.songs[4].video;
         a.src = content.songs[4].audio;
         v.play();
@@ -389,6 +417,7 @@ const content = {
     }
 
     function play6() {
+      active = 5;
         v.src = content.songs[5].video;
         a.src = content.songs[5].audio;
         v.play();
@@ -405,6 +434,7 @@ const content = {
     }
 
     function play7() {
+      active = 6;
         v.src = content.songs[6].video;
         a.src = content.songs[6].audio;
         v.play();
