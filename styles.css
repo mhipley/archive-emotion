@@ -100,10 +100,36 @@ canvas {
   bottom: 2rem;
   left: calc(50% - 1.5rem);
   transform: rotate(0deg);
-  transition: 0.5s transform ease-in-out;
+  transition: 0.5s all ease-in-out;
+  opacity: 0.5;
 }
 #menu-toggle:hover {
   transform: rotate(180deg);
+  opacity: 1;
+}
+
+#reset {
+  height: 3rem;
+  width: 3rem;
+  background-color: transparent;
+  background-image: url("./images/reset.png");
+  background-size: cover;
+  border: none;
+  z-index: 500;
+  position: absolute;
+  top: 2rem;
+  left: calc(50% - 1.5rem);
+  transform: rotate(0deg);
+  transition: 0.5s all ease-in-out;
+  display: none;
+  opacity: 0.5;
+}
+#reset:hover {
+  transform: rotate(-180deg);
+  opacity: 1;
+}
+#reset.active {
+  display: block;
 }
 
 #ui {
@@ -286,6 +312,13 @@ canvas {
 
 .animate-toggle {
   transition: top 2s;
+}
+
+#l, #l-rev {
+  display: none;
+}
+#l.active, #l-rev.active {
+  display: block;
 }
 
 canvas.lights {

@@ -53,7 +53,6 @@ function cloneLights(lightsCanvas) {
 }
 
 window.addEventListener("resize", () => {
-  console.log("resized");
   fitCanvas();
 });
 
@@ -245,10 +244,6 @@ const content = {
       const waveArray = new Float32Array(bufferLength);
       analyser.getFloatTimeDomainData(waveArray);
 
-      console.log(active);
-      console.log(content.songs[active].maxOffset);
-
-      console.log(content.songs[active].maxOffset);
 
       var maximum;
 
@@ -259,16 +254,11 @@ const content = {
       } else {
         maximum = canvas.width/4;
       }
-
-      console.log(maximum);
-
     
       function convertRange( value, r1, r2 ) { 
         return ( value - r1[ 0 ] ) * ( r2[ 1 ] - r2[ 0 ] ) / ( r1[ 1 ] - r1[ 0 ] ) + r2[ 0 ];
       }
       var offset = convertRange(waveArray[0], [0, 1], [0 , maximum]);
-
-      console.log(offset);
 
       back.width = canvas.width;
       back.height = canvas.height;
@@ -328,129 +318,37 @@ const content = {
       x.classList.toggle("active");
     }
 
-    function play1() {
-        active = 0;
-        v.src = content.songs[0].video;
-        a.src = content.songs[0].audio;
-        v.play();
-        var x = document.getElementById("l");
-        x.classList.add("active");
-        x.style.mixBlendMode = content.songs[0].blendMode;
-        x.style.filter = content.songs[0].filter;
-        x.style.opacity = content.songs[0].opacity;
-        var y = document.getElementById("l-rev");
-        y.classList.add("active");
-        y.style.mixBlendMode = content.songs[0].blendMode;
-        y.style.filter = content.songs[0].filter;      
-        y.style.opacity = content.songs[0].opacity;
-        y.style.opacity = content.songs[0].opacity;
-    }
-    
+    function reset() {
+      pauseMusic();
+      var reset = document.getElementById("reset");
+      reset.classList.remove("active");
+      var x = document.getElementById("l");
+      x.classList.remove("active");
+      var y = document.getElementById("l-rev");
+      y.classList.remove("active");
+      v.pause();
+      loadImage(v, start);
 
-    function play2() {
-        active = 1;
-        v.src = content.songs[1].video;
-        a.src = content.songs[1].audio;
-        v.play();
-        var x = document.getElementById("l");
-        x.classList.add("active");
-        x.style.mixBlendMode = content.songs[1].blendMode;
-        x.style.filter = content.songs[1].filter;
-        x.style.opacity = content.songs[1].opacity;
-        var y = document.getElementById("l-rev");
-        y.classList.add("active");
-        y.style.mixBlendMode = content.songs[1].blendMode;
-        y.style.filter = content.songs[1].filter;
-        y.style.opacity = content.songs[1].opacity;
-    }
-    
-
-    function play3() {
-        active = 2;
-        v.src = content.songs[2].video;
-        a.src = content.songs[2].audio;
-        v.play();
-        var x = document.getElementById("l");
-        x.classList.add("active");
-        x.style.mixBlendMode = content.songs[2].blendMode;
-        x.style.filter = content.songs[2].filter;
-        x.style.opacity = content.songs[2].opacity;
-        var y = document.getElementById("l-rev");
-        y.classList.add("active");
-        y.style.mixBlendMode = content.songs[2].blendMode;
-        y.style.filter = content.songs[2].filter;
-        y.style.opacity = content.songs[2].opacity;
-    }
-    
-    function play4() {
-      active = 3;
-        v.src = content.songs[3].video;
-        a.src = content.songs[3].audio;
-        v.play();
-        var x = document.getElementById("l");
-        x.classList.add("active");
-        x.style.mixBlendMode = content.songs[3].blendMode;
-        x.style.filter = content.songs[3].filter;
-        x.style.opacity = content.songs[3].opacity;
-        var y = document.getElementById("l-rev");
-        y.classList.add("active");
-        y.style.mixBlendMode = content.songs[3].blendMode;
-        y.style.filter = content.songs[3].filter;
-        y.style.opacity = content.songs[3].opacity;
     }
 
-    function play5() {
-      active = 4;
-        v.src = content.songs[4].video;
-        a.src = content.songs[4].audio;
-        v.play();
-        var x = document.getElementById("l");
-        x.classList.add("active");
-        x.style.mixBlendMode = content.songs[4].blendMode;
-        x.style.filter = content.songs[4].filter;
-        x.style.opacity = content.songs[4].opacity;
-        var y = document.getElementById("l-rev");
-        y.classList.add("active");
-        y.style.mixBlendMode = content.songs[4].blendMode;
-        y.style.filter = content.songs[4].filter;
-        y.style.opacity = content.songs[4].opacity;
-    }
-
-    function play6() {
-      active = 5;
-        v.src = content.songs[5].video;
-        a.src = content.songs[5].audio;
-        v.play();
-        var x = document.getElementById("l");
-        x.classList.add("active");
-        x.style.mixBlendMode = content.songs[5].blendMode;
-        x.style.filter = content.songs[5].filter;
-        x.style.opacity = content.songs[5].opacity;
-        var y = document.getElementById("l-rev");
-        y.classList.add("active");
-        y.style.mixBlendMode = content.songs[5].blendMode;
-        y.style.filter = content.songs[5].filter;
-        y.style.opacity = content.songs[5].opacity;
-    }
-
-    function play7() {
-      active = 6;
-        v.src = content.songs[6].video;
-        a.src = content.songs[6].audio;
-        v.play();
-        var x = document.getElementById("l");
-        x.classList.add("active");
-        x.style.mixBlendMode = content.songs[6].blendMode;
-        x.style.filter = content.songs[6].filter;
-        x.style.opacity = content.songs[6].opacity;
-        var y = document.getElementById("l-rev");
-        y.classList.add("active");
-        y.style.mixBlendMode = content.songs[6].blendMode;
-        y.style.filter = content.songs[6].filter;
-        y.style.opacity = content.songs[6].opacity;
-    }
-    
-
+    function play(songId) {      
+      v.src = content.songs[songId].video;
+      a.src = content.songs[songId].audio;
+      v.play();
+      var x = document.getElementById("l");
+      x.classList.add("active");
+      x.style.mixBlendMode = content.songs[songId].blendMode;
+      x.style.filter = content.songs[songId].filter;
+      x.style.opacity = content.songs[songId].opacity;
+      var y = document.getElementById("l-rev");
+      y.classList.add("active");
+      y.style.mixBlendMode = content.songs[songId].blendMode;
+      y.style.filter = content.songs[songId].filter;      
+      y.style.opacity = content.songs[songId].opacity;
+      y.style.opacity = content.songs[songId].opacity;
+      var reset = document.getElementById("reset");
+      reset.classList.add("active");
+  }
 
 /* NORTHERN LIGHTS */
 
@@ -638,7 +536,6 @@ Curve.prototype = {
       return this.points[0];
     }
     else if (p >= this.points[this.points.length - 1].z) {
-      console.log('over');
       return this.points[this.points.length - 1];
     }
     else {

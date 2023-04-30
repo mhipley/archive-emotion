@@ -100,9 +100,35 @@
     bottom: 2rem;
     left: calc(50% - 1.5rem);
     transform: rotate(0deg);
-    transition: .5s transform ease-in-out;
+    transition: .5s all ease-in-out;
+    opacity: .5;
     &:hover {
         transform: rotate(180deg);
+        opacity: 1;
+    }
+  }
+
+  #reset {
+    height: 3rem;
+    width: 3rem;
+    background-color: transparent;
+    background-image: url('./images/reset.png');
+    background-size: cover;
+    border: none;
+    z-index: 500;
+    position: absolute;
+    top: 2rem;
+    left: calc(50% - 1.5rem);
+    transform: rotate(0deg);
+    transition: .5s all ease-in-out;
+    display: none;
+    opacity: .5;
+    &:hover {
+        transform: rotate(-180deg);
+        opacity: 1;
+    }
+    &.active {
+      display: block;
     }
   }
   
@@ -302,6 +328,13 @@
   .animate-toggle {
     transition: top 2s;
   }
+
+#l, #l-rev {
+  display: none;
+  &.active {
+    display: block;
+  }
+}
   
 canvas.lights{
     // filter: blur(15px) drop-shadow(0 0 30px rgba(51,180,172,1)); 
