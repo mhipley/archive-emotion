@@ -303,14 +303,16 @@ const content = {
 
     
     //toggle display of text modal
-    function toggleText() {
+    function openText() {
       var x = document.getElementById("text-modal");
-      if (x.style.top === "0px") {
-        x.style.top = "-100vh";
-      } else {
-        x.style.top = "0px";
-      }
+      x.style.top = "0px";
       typewriter.start();
+    }
+
+    function closeText() {
+      var x = document.getElementById("text-modal");
+      x.style.top = "-100vh";
+      // fwdText();
     }
 
     function toggleMenu() {
@@ -866,5 +868,4 @@ typewriter.pauseFor(1000)
       function fwdText() {
         document.getElementById( 'animated-text' ).style.display = 'none';
         document.getElementById( 'screen-reader' ).style.display = 'block';
-        document.getElementById( 'forward' ).style.display = 'none';
       }
