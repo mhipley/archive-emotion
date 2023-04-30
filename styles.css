@@ -89,8 +89,8 @@ canvas {
 }
 
 #menu-toggle {
-  height: 2rem;
-  width: 2rem;
+  height: 3rem;
+  width: 3rem;
   background-color: transparent;
   background-image: url("./images/dots.png");
   background-size: cover;
@@ -98,7 +98,7 @@ canvas {
   z-index: 500;
   position: absolute;
   bottom: 2rem;
-  left: calc(50% - 1rem);
+  left: calc(50% - 1.5rem);
   transform: rotate(0deg);
   transition: 0.5s transform ease-in-out;
 }
@@ -138,6 +138,8 @@ canvas {
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
   margin: 0 auto;
+  background-image: url("./images/dial.png");
+  background-size: cover;
 }
 #radial-ui button {
   height: 20%;
@@ -155,8 +157,9 @@ canvas {
 }
 #radial-ui .play-wrapper {
   position: absolute;
-  height: calc(100%);
-  left: 40%;
+  height: calc(100% - 5rem);
+  left: calc(40% + 0.5rem);
+  top: 2rem;
 }
 #radial-ui #play-1 {
   background-image: url("./images/button-1.png");

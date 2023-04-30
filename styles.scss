@@ -89,8 +89,8 @@
   }
 
   #menu-toggle {
-    height: 2rem;
-    width: 2rem;
+    height: 3rem;
+    width: 3rem;
     background-color: transparent;
     background-image: url('./images/dots.png');
     background-size: cover;
@@ -98,7 +98,7 @@
     z-index: 500;
     position: absolute;
     bottom: 2rem;
-    left: calc(50% - 1rem);
+    left: calc(50% - 1.5rem);
     transform: rotate(0deg);
     transition: .5s transform ease-in-out;
     &:hover {
@@ -142,7 +142,8 @@
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
     margin: 0 auto;
-
+    background-image: url('./images/dial.png');
+    background-size:cover;
 
 
     button {
@@ -161,9 +162,9 @@
       }
       .play-wrapper {
         position: absolute;
-        height: calc(100%);
-
-        left: 40%;
+        height: calc(100% - 5rem);
+        left: calc(40% + 0.5rem);
+        top: 2rem;
         }  
         
     #play-1 {
