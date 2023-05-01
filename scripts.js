@@ -342,13 +342,15 @@ const content = {
     //toggle display of text modal
     function openText() {
       var x = document.getElementById("text-modal");
-      x.style.top = "0px";
+      x.style.opacity = "1";
+      x.style.pointerEvents = "all";
       typewriter.start();
     }
 
     function closeText() {
       var x = document.getElementById("text-modal");
-      x.style.top = "-100vh";
+      x.style.opacity = "0";
+      x.style.pointerEvents = "none";
       // fwdText();
     }
 
