@@ -54,6 +54,7 @@ html {
   line-height: 1.5rem;
   width: 100vw;
   height: 100vh;
+  font-size: 16px;
 }
 
 body {
@@ -144,13 +145,11 @@ canvas {
   margin: 0;
   padding: 0;
   opacity: 0;
-  transform: translate3d(0, -2rem, 0);
   transition: 1s all ease-in-out;
   pointer-events: none;
 }
 #ui.active {
   opacity: 1;
-  transform: translate3d(0, 0, 0);
   pointer-events: all;
 }
 
@@ -332,6 +331,29 @@ canvas.lights.flipped {
 
 #cX {
   mix-blend-mode: lighten;
+}
+
+@media (max-width: 768px) {
+  #text h1 {
+    padding: 1rem 1rem 0rem 1rem;
+  }
+
+  #text #animated-text, #screen-reader {
+    padding: 0 1.5rem 1rem 1rem;
+  }
+  #text #animated-text br, #screen-reader br {
+    display: block;
+    margin: 1.5rem 0;
+    content: "";
+  }
+
+  #text-modal {
+    width: calc(100vw + 2rem);
+  }
+
+  #text-wrapper {
+    margin-right: 4rem;
+  }
 }
 
 /*# sourceMappingURL=styles.css.map */

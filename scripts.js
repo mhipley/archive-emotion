@@ -4,16 +4,16 @@ var vPrev = document.getElementById("video-prev");
 var vNext = document.getElementById("video-next");
 var canvas = document.getElementById("c");
 var lightsCanvas = document.getElementById("l");
-var context = canvas.getContext("2d");
+var context = canvas.getContext("2d", { willReadFrequently: true });
 var back = document.createElement("canvas");
-var backcontext = back.getContext("2d");
+var backcontext = back.getContext("2d", { willReadFrequently: true });
 var transCanvas = document.getElementById("cX");
-var cXcontext = transCanvas.getContext("2d");
+var cXcontext = transCanvas.getContext("2d", { willReadFrequently: true });
 var audioContext = new AudioContext();
 var audioSrc = audioContext.createMediaElementSource(a);
 var active = 0;
 
-var cw, ch, cx, scale;
+var cw, ch, cx, scale, active;
 
 function fitCanvas() {
   cw = window.innerWidth;
@@ -206,7 +206,8 @@ const content = {
           audioSrc.connect(analyser);
           analyser.connect(audioContext.destination);
           analyser.fftSize = 32;
-          drawVideo(v, context, backcontext, cXcontext);
+          drawVideo(v, context, backcontext, cXcontext, Date.now());
+          bumpVideo(canvas, transCanvas);
           audioContext.resume();
           playMusic();
       },
@@ -228,14 +229,8 @@ const content = {
     function pauseMusic() {
       a.pause();
     }
-    
-    function drawVideo(v, c, bc, cx, a) {
 
-      fitCanvas();
-      scale = canvas.height;
-
-      cloneLights(lightsCanvas);
-
+    function bumpVideo(c, cx) {
       // audio analyser
       const bufferLength = analyser.frequencyBinCount;
       const freqArray = new Uint8Array(bufferLength);
@@ -243,7 +238,6 @@ const content = {
 
       const waveArray = new Float32Array(bufferLength);
       analyser.getFloatTimeDomainData(waveArray);
-
 
       var maximum;
 
@@ -260,6 +254,54 @@ const content = {
       }
       var offset = convertRange(waveArray[0], [0, 1], [0 , maximum]);
 
+      var freq;
+
+      if (active == 3) {
+        freq = 100;
+      } else 
+      {
+        freq = 5000;
+      }
+
+      c.style.left = offset + "px";
+      cx.style.left = -offset + "px";
+
+      // Start over!
+      setTimeout(function () {
+        bumpVideo(c, cx);
+      }, freq);
+    }
+    
+    function drawVideo(v, c, bc, cx, start) {
+
+      fitCanvas();
+      scale = canvas.height;
+
+      cloneLights(lightsCanvas);
+
+      // // audio analyser
+      // const bufferLength = analyser.frequencyBinCount;
+      // const freqArray = new Uint8Array(bufferLength);
+      // analyser.getByteFrequencyData(freqArray);
+
+      // const waveArray = new Float32Array(bufferLength);
+      // analyser.getFloatTimeDomainData(waveArray);
+
+      // var maximum;
+
+      // if (content.songs[active].maxOffset === 0 )
+      // {
+      //   maximum = 6;
+
+      // } else {
+      //   maximum = canvas.width/4;
+      // }
+    
+      // function convertRange( value, r1, r2 ) { 
+      //   return ( value - r1[ 0 ] ) * ( r2[ 1 ] - r2[ 0 ] ) / ( r1[ 1 ] - r1[ 0 ] ) + r2[ 0 ];
+      // }
+      // var offset = convertRange(waveArray[0], [0, 1], [0 , maximum]);
+
       back.width = canvas.width;
       back.height = canvas.height;
       if (v.paused || v.ended) return false;
@@ -271,6 +313,7 @@ const content = {
         bumper = (canvas.height - canvas.width)/2;
       }
 
+
       
       // First, draw it into the backing canvases
       bc.drawImage(v, 0, 0, scale, scale);
@@ -280,24 +323,18 @@ const content = {
       var glitchData = idata.data;
       // Loop through the pixels, turning them grayscale
       for (var i = 0; i < glitchData.length; i += 4) {
-        // var r = glitchData[i];
-        // var g = glitchData[i+1];
-        // var b = glitchData[i+2];
-        // var brightness = (3*r+4*g+b)>>>3;
-        // glitchData[i] = brightness;
-        // glitchData[i+1] = brightness;
-        // glitchData[i+2] = brightness;
+        // alter pixels here
       }
       idata.data = data;
       // Draw the pixels onto the visible canvas
-      c.putImageData(idata, (bumper + offset), 0);
-      cx.putImageData(idata, (bumper - offset), 0);
+      c.putImageData(idata, (bumper), 0);
+      cx.putImageData(idata, (bumper), 0);
 
 
       
       // Start over!
       setTimeout(function () {
-        drawVideo(v, c, bc, cx);
+        drawVideo(v, c, bc, cx, start);
       }, 0);
     }
 
@@ -334,6 +371,7 @@ const content = {
     }
 
     function play(songId) {      
+      active = songId;
       v.src = content.songs[songId].video;
       a.src = content.songs[songId].audio;
       v.play();
@@ -368,7 +406,7 @@ var CURVE_POINT_MAX_FLOAT_Y_DIST = 80;
 var CURVE_POINT_MIN_FLOAT_DIST = 15;
 var CURVE_POINT_MAX_FLOAT_TIME = 9000; // longest a curve point can take to get to next keyframe
 var CURVE_POINT_MIN_FLOAT_TIME = 3000; // shortest a curve point can take to get to next keyframe
-var BRUSH_COUNT = 150;
+var BRUSH_COUNT = 100;
 var BRUSH_WIDTH = 100;
 var BRUSH_HEIGHT = 500;
 var BRUSH_MIN_SCALE_Y = .02;
