@@ -4,11 +4,11 @@ var vPrev = document.getElementById("video-prev");
 var vNext = document.getElementById("video-next");
 var canvas = document.getElementById("c");
 var lightsCanvas = document.getElementById("l");
-var context = canvas.getContext("2d", { willReadFrequently: true });
+var context = canvas.getContext("2d");
 var back = document.createElement("canvas");
 var backcontext = back.getContext("2d", { willReadFrequently: true });
 var transCanvas = document.getElementById("cX");
-var cXcontext = transCanvas.getContext("2d", { willReadFrequently: true });
+var cXcontext = transCanvas.getContext("2d");
 var audioContext = new AudioContext();
 var audioSrc = audioContext.createMediaElementSource(a);
 var active = 0;
@@ -20,17 +20,17 @@ function fitCanvas() {
   ch = window.innerHeight;
   
   if (cw >= ch) {
-    canvas.width = cw;
-    canvas.height = ch;
-    transCanvas.width = cw;
-    transCanvas.height = ch;
-    scale = canvas.height;
+    canvas.width = cw *.8;
+    canvas.height = ch *.8;
+    transCanvas.width = cw * .8;
+    transCanvas.height = ch * .8;
+    scale = canvas.height * .8;
   } else {
-    canvas.width = cw;
-    canvas.height = cw;
-    transCanvas.width = cw;
-    transCanvas.height = cw;
-    scale = canvas.width;
+    canvas.width = cw * .8;
+    canvas.height = cw * .8;
+    transCanvas.width = cw * .8;
+    transCanvas.height = cw * .8;
+    scale = canvas.width * .8;
   }
 }
 
@@ -257,10 +257,10 @@ const content = {
       var freq;
 
       if (active == 3) {
-        freq = 100;
+        freq = 0;
       } else 
       {
-        freq = 5000;
+        freq = 0;
       }
 
       c.style.left = offset + "px";
@@ -768,7 +768,7 @@ var NorthernLights = function (parentElement, width, height, curves) {
   this.canvas = lightsCanvas;
   this.canvas.width = (this.width / 2);
   this.canvas.height = this.height;
-  this.ctx = this.canvas.getContext('2d');
+  this.ctx = this.canvas.getContext("2d", { willReadFrequently: true });
   this.ctx.globalCompositeOperation = "color-dodge";
 
   // make a new random curve if one wasn't passed

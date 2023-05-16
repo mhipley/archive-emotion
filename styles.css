@@ -163,7 +163,7 @@ canvas {
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
   margin: 0 auto;
-  background-image: url("./images/dial.png");
+  background-image: url("./images/dial.svg");
   background-size: cover;
 }
 #radial-ui button {
@@ -184,7 +184,7 @@ canvas {
   position: absolute;
   height: calc(100% - 5rem);
   left: calc(40% + 0.5rem);
-  top: 2rem;
+  top: 2.5rem;
 }
 #radial-ui #play-1 {
   background-image: url("./images/button-1.png");
@@ -233,11 +233,11 @@ canvas {
 }
 #radial-ui #text-toggle {
   position: absolute;
-  height: 30%;
-  left: 35%;
-  top: 35%;
+  height: 20%;
+  left: 40%;
+  top: 40%;
   background: transparent;
-  background-image: url("./images/text.png");
+  background-image: url("./images/text-2.png");
   background-size: contain;
 }
 
