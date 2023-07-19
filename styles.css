@@ -81,6 +81,16 @@ canvas {
   margin: auto;
 }
 
+#c {
+  left: 0;
+  transition: all 0.3s ease-in-out;
+}
+
+#cX {
+  left: 0;
+  transition: all 0.3s ease-in-out;
+}
+
 #video-preloader {
   opacity: 0;
 }
@@ -93,7 +103,7 @@ canvas {
   height: 3rem;
   width: 3rem;
   background-color: transparent;
-  background-image: url("./images/dots.png");
+  background-image: url("./images/circle-trigger.svg");
   background-size: cover;
   border: none;
   z-index: 500;
@@ -102,18 +112,17 @@ canvas {
   left: calc(50% - 1.5rem);
   transform: rotate(0deg);
   transition: 0.5s all ease-in-out;
-  opacity: 0.5;
+  filter: blur(0.75px);
 }
 #menu-toggle:hover {
   transform: rotate(180deg);
-  opacity: 1;
 }
 
 #reset {
   height: 3rem;
   width: 3rem;
   background-color: transparent;
-  background-image: url("./images/reset.png");
+  background-image: url("./images/back-button.svg");
   background-size: cover;
   border: none;
   z-index: 500;
@@ -123,11 +132,10 @@ canvas {
   transform: rotate(0deg);
   transition: 0.5s all ease-in-out;
   display: none;
-  opacity: 0.5;
+  filter: blur(0.75px);
 }
 #reset:hover {
   transform: rotate(-180deg);
-  opacity: 1;
 }
 #reset.active {
   display: block;
@@ -182,9 +190,9 @@ canvas {
 }
 #radial-ui .play-wrapper {
   position: absolute;
-  height: calc(100% - 5rem);
-  left: calc(40% + 0.5rem);
-  top: 2.5rem;
+  height: calc(100% - 8rem);
+  left: calc(40% + 1.5rem);
+  top: 4rem;
 }
 #radial-ui #play-1 {
   background-image: url("./images/button-1.png");

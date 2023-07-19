@@ -81,6 +81,16 @@
     bottom: 0;
     margin: auto;
   }
+
+  #c {
+    left: 0;
+    transition: all 0.3s ease-in-out;
+  }
+
+  #cX {
+    left: 0;
+    transition: all 0.3s ease-in-out;
+  }
   
   #video-preloader {
     opacity: 0;
@@ -94,7 +104,7 @@
     height: 3rem;
     width: 3rem;
     background-color: transparent;
-    background-image: url('./images/dots.png');
+    background-image: url('./images/circle-trigger.svg');
     background-size: cover;
     border: none;
     z-index: 500;
@@ -103,20 +113,21 @@
     left: calc(50% - 1.5rem);
     transform: rotate(0deg);
     transition: .5s all ease-in-out;
-    opacity: .5;
+    filter: blur(.75px);
+    // opacity: .5;
     &:hover {
         transform: rotate(180deg);
-        opacity: 1;
+        // opacity: 1;
     }
 
-
   }
+  
 
   #reset {
     height: 3rem;
     width: 3rem;
     background-color: transparent;
-    background-image: url('./images/reset.png');
+    background-image: url('./images/back-button.svg');
     background-size: cover;
     border: none;
     z-index: 500;
@@ -126,10 +137,11 @@
     transform: rotate(0deg);
     transition: .5s all ease-in-out;
     display: none;
-    opacity: .5;
+    filter: blur(.75px);
+    // opacity: .5;
     &:hover {
         transform: rotate(-180deg);
-        opacity: 1;
+        // opacity: 1;
     }
     &.active {
       display: block;
@@ -197,9 +209,9 @@
       }
       .play-wrapper {
         position: absolute;
-        height: calc(100% - 5rem);
-        left: calc(40% + 0.5rem);
-        top: 2.5rem;
+        height: calc(100% - 8rem);
+        left: calc(40% + 1.5rem);
+        top: 4rem;
         }  
         
     #play-1 {
