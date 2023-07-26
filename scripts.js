@@ -162,7 +162,7 @@ const content = {
             bpm: 84
         },
         {
-            video: "videos/Video4.mp4",
+            video: "videos/Video_Glitch_2407.mp4",
             blendMode: "hard-light",
             filter: "blur(15px) drop-shadow(0 0 30px rgba(51,180,172,1)",
             baseColor: "rgb(255, 200, 220)",
