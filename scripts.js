@@ -18,6 +18,7 @@ var duration;
 var xPos = 0;
 var mDur;
 var bpm;
+var hasZoomed = false;
 
 var cw, ch, cx, scale, active;
 
@@ -72,12 +73,19 @@ function loadImage(v, start) {
     let MIN_ZOOM = .01;
     let now = Date.now();
     let elapsed = now - start;
-    let multiplier = MIN_ZOOM + (elapsed/2000);
+    let multiplier = MIN_ZOOM + (elapsed/1500);
     let zoom = 1;
+
+
     if (multiplier <= 1) {
       zoom = multiplier;
     } else {
       zoom = 1;
+      if (hasZoomed === false) {
+        bumpImage();
+      }
+      
+
     }
     let scaledSize = canvas.width * zoom;
     let margin = ((canvas.width - scaledSize) / 2)/zoom;
@@ -87,7 +95,6 @@ function loadImage(v, start) {
     } else {
       bumper = (canvas.height - canvas.width)/2;
     }
-
     
     let cameraOffset = { x: (margin + bumper), y: margin };
     context.scale(zoom, zoom);
@@ -97,6 +104,10 @@ function loadImage(v, start) {
     return false;
   }
   
+  function bumpImage() {
+    canvas.classList.add("shake-effect");
+    hasZoomed = true;
+  }
 
   // Start over!
   setTimeout(function () {
@@ -106,7 +117,7 @@ function loadImage(v, start) {
 }
 
 var preload = new Image();
-preload.src = "https://marthahipley.com/archive-emotion/images/still-new-2.jpg";
+preload.src = "https://marthahipley.com/archive-emotion/images/still-final-blk.jpg";
 preload.onload = function () {
   loadImage(v, start);
 };    
@@ -127,7 +138,7 @@ const content = {
             bpm: 91
         },
         {
-            video: "videos/Video_2_Track 2_Update.mp4",
+            video: "videos/Video2.mp4",
             blendMode: "screen",
             filter: "blur(15px) drop-shadow(0 0 30px #e47e30) hue-rotate(210deg)",
             baseColor: "rgb(255, 200, 220)",
@@ -151,7 +162,7 @@ const content = {
             bpm: 84
         },
         {
-            video: "videos/Video_4_Track 4_Update_.mp4",
+            video: "videos/Video4.mp4",
             blendMode: "hard-light",
             filter: "blur(15px) drop-shadow(0 0 30px rgba(51,180,172,1)",
             baseColor: "rgb(255, 200, 220)",
@@ -217,21 +228,15 @@ const content = {
           analyser.connect(audioContext.destination);
           analyser.fftSize = 32;
           drawVideo(v, context, backcontext, cXcontext, Date.now());
-          // bumpVideo(canvas, transCanvas);
           audioContext.resume();
           playMusic();
-          console.log(active);
           var au = document.getElementById("audio");
           au.onloadedmetadata = function() {
               duration = au.duration;
               bpm = content.songs[active].bpm;
               mDur = ((duration / 60)*bpm) * 2;
               var n = 0;
-              // var bpm = content.songs[active].bpm;
-              // var freq = (1000 * 60)/bpm;
-              // var values = freq * duration;
 
-              // videoSine(canvas, transCanvas, n);
               bumpVideo(canvas, transCanvas, n);
           };
       },
@@ -254,215 +259,11 @@ const content = {
       a.pause();
     }
 
+    // helper for testing timings
     function beep() {
       var snd = new Audio("data:audio/wav;base64,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qJrx4KOQjahZxWbcZgztj2c49nKmkId44S71j0c8eV9yDK6uPRzx5X18eDvjvQ6yKo9ZSS6l//8elePK/Lf//IInrOF/FvDoADYAGBMGb7FtErm5MXMlmPAJQVgWta7Zx2go+8xJ0UiCb8LHHdftWyLJE0QIAIsI+UbXu67dZMjmgDGCGl1H+vpF4NSDckSIkk7Vd+sxEhBQMRU8j/12UIRhzSaUdQ+rQU5kGeFxm+hb1oh6pWWmv3uvmReDl0UnvtapVaIzo1jZbf/pD6ElLqSX+rUmOQNpJFa/r+sa4e/pBlAABoAAAAA3CUgShLdGIxsY7AUABPRrgCABdDuQ5GC7DqPQCgbbJUAoRSUj+NIEig0YfyWUho1VBBBA//uQZB4ABZx5zfMakeAAAAmwAAAAF5F3P0w9GtAAACfAAAAAwLhMDmAYWMgVEG1U0FIGCBgXBXAtfMH10000EEEEEECUBYln03TTTdNBDZopopYvrTTdNa325mImNg3TTPV9q3pmY0xoO6bv3r00y+IDGid/9aaaZTGMuj9mpu9Mpio1dXrr5HERTZSmqU36A3CumzN/9Robv/Xx4v9ijkSRSNLQhAWumap82WRSBUqXStV/YcS+XVLnSS+WLDroqArFkMEsAS+eWmrUzrO0oEmE40RlMZ5+ODIkAyKAGUwZ3mVKmcamcJnMW26MRPgUw6j+LkhyHGVGYjSUUKNpuJUQoOIAyDvEyG8S5yfK6dhZc0Tx1KI/gviKL6qvvFs1+bWtaz58uUNnryq6kt5RzOCkPWlVqVX2a/EEBUdU1KrXLf40GoiiFXK///qpoiDXrOgqDR38JB0bw7SoL+ZB9o1RCkQjQ2CBYZKd/+VJxZRRZlqSkKiws0WFxUyCwsKiMy7hUVFhIaCrNQsKkTIsLivwKKigsj8XYlwt/WKi2N4d//uQRCSAAjURNIHpMZBGYiaQPSYyAAABLAAAAAAAACWAAAAApUF/Mg+0aohSIRobBAsMlO//Kk4soosy1JSFRYWaLC4qZBYWFRGZdwqKiwkNBVmoWFSJkWFxX4FFRQWR+LsS4W/rFRb/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////VEFHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAU291bmRib3kuZGUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMjAwNGh0dHA6Ly93d3cuc291bmRib3kuZGUAAAAAAAAAACU=");  
       snd.play();
-  }
-
-//     function videoSine(c, cx, n) {
-//       // get song ID
-//       n++;
-//       var freq = ((1000 * 60)/bpm)/2;
-//       var xPos;
-//       var multiplier;
-//       var elapsed = (n * freq)/1000;
-//       console.log(elapsed);
-//       if (active === 0) {
-//         if (elapsed < 10) {
-//           multiplier = 10;
-//         }
-//         else if (elapsed >= 10 && elapsed <20) {
-//           multiplier = 0;
-//         }
-//         else if (elapsed >= 20 && elapsed <31) {
-//           multiplier = 10;
-//         }
-//         else if (elapsed >= 31 && elapsed <39) {
-//           multiplier = 20;
-//         }
-//         else if (elapsed >= 39 && elapsed <43) {
-//           multiplier = 30;
-//         }
-//         else if (elapsed >= 43 && elapsed <62) {
-//           multiplier = 10;
-//         }
-//         else if (elapsed >= 62 && elapsed <73) {
-//           multiplier = 20;
-//         }
-//         else if (elapsed >= 73 && elapsed <82) {
-//           multiplier = 0;
-//         }
-//         else if (elapsed >= 82 && elapsed <103) {
-//           multiplier = 20;
-//         }
-//         else if (elapsed >= 103 && elapsed <115) {
-//           multiplier = 10;
-//         }
-//         else {
-//           multiplier = 30;
-//         }
-
-//       }
-
-//       if (active === 1) {
-//         if (elapsed < 10) {
-//           multiplier = 0;
-//         }
-//         else if (elapsed >= 10 && elapsed <29) {
-//           multiplier = 30;
-//         }
-//         else if (elapsed >= 29 && elapsed <35) {
-//           multiplier = 0;
-//         }
-//         else if (elapsed >= 35 && elapsed <59) {
-//           multiplier = 2;
-//         }
-//         else if (elapsed >= 59 && elapsed <90) {
-//           multiplier = 40;
-//         }
-//         else if (elapsed >= 90 && elapsed <110) {
-//           multiplier = 20;
-//         }
-//         else if (elapsed >= 110 && elapsed <128) {
-//           multiplier = 0;
-//         }
-//         else if (elapsed >= 128 && elapsed <135) {
-//           multiplier = 50;
-//         }
-//         else if (elapsed >= 135 && elapsed <150) {
-//           multiplier = 10;
-//         }
-//         else if (elapsed >= 150 && elapsed <180) {
-//           multiplier = 0;
-//         }
-//         else {
-//           multiplier = 30;
-//         }
-
-//       }
-
-//       if (active === 2) {
-//         if (elapsed < 68) {
-//           multiplier = 30;
-//         }
-//         else if (elapsed >= 68 && elapsed <82) {
-//           multiplier = 40;
-//         }
-//         else if (elapsed >= 82 && elapsed <92) {
-//           multiplier = 20;
-//         }
-//         else if (elapsed >= 92 && elapsed <97) {
-//           multiplier = 60;
-//         }
-//         else if (elapsed >= 97 && elapsed <136) {
-//           multiplier = 20;
-//         }
-//         else if (elapsed >= 136 && elapsed <150) {
-//           multiplier = 40;
-//         }
-//         else if (elapsed >= 150 && elapsed <160) {
-//           multiplier = 50;
-//         }
-//         else if (elapsed >= 160 && elapsed <170) {
-//           multiplier = 0;
-//         }
-//         else if (elapsed >= 170 && elapsed <180) {
-//           multiplier = 40;
-//         }
-//         else {
-//           multiplier = 10;
-//         }
-
-//       }
-
-//       if (active === 3) {
-//         if (elapsed < 11) {
-//           multiplier = 60;
-//         }
-//         else if (elapsed >= 11 && elapsed <25) {
-//           multiplier = 70;
-//         }
-//         else if (elapsed >= 25 && elapsed <35) {
-//           multiplier = 80;
-//         }
-//         else {
-//           multiplier = 90;
-//         }
-
-//       }
-      
-
-//       if (active === 4) {
-//         if (elapsed < 11) {
-//           multiplier = 60;
-//         }
-//         else if (elapsed >= 11 && elapsed <25) {
-//           multiplier = 70;
-//         }
-//         else if (elapsed >= 25 && elapsed <35) {
-//           multiplier = 80;
-//         }
-//         else {
-//           multiplier = 90;
-//         }
-
-//       }      
-
-//       if (active === 5) {
-//         if (elapsed < 11) {
-//           multiplier = 60;
-//         }
-//         else if (elapsed >= 11 && elapsed <25) {
-//           multiplier = 70;
-//         }
-//         else if (elapsed >= 25 && elapsed <35) {
-//           multiplier = 80;
-//         }
-//         else {
-//           multiplier = 90;
-//         }
-
-//       }
-//       if (active === 6) {
-//         if (elapsed < 11) {
-//           multiplier = 60;
-//         }
-//         else if (elapsed >= 11 && elapsed <25) {
-//           multiplier = 70;
-//         }
-//         else if (elapsed >= 25 && elapsed <35) {
-//           multiplier = 80;
-//         }
-//         else {
-//           multiplier = 90;
-//         }
-
-//       }
-
-//       if ( n % 2 == 0) {
-
-//         xPos = 1 * multiplier;
-//       } else {
-//         xPos = 0;
-//       }
-
-//       c.style.left = xPos + "px";
-//       cx.style.left = -xPos + "px";
-
-
-
-//       if (n < mDur) {
-//           songBPM = setTimeout(function () {
-//             videoSine(c, cx, n);
-
-//           }, freq);
-//         }
-//       else {
-//         c.style.left = "0px";
-//         cx.style.left = "0px";
-//         return;
-//       }
-//  }
+    }
 
     function bumpVideo(c, cx, n) {
       // update n
@@ -481,10 +282,11 @@ const content = {
 
       if (content.songs[active].maxOffset === 0 )
       {
-        maximum = 15;
+        maximum = 10;
 
       } else {
-        maximum = canvas.width/4;
+        // maximum = canvas.width/4;
+        maximum = 300;
       }
     
       function convertRange( value, r1, r2 ) { 

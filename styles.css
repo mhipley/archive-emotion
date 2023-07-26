@@ -1,5 +1,4 @@
 @charset "UTF-8";
-/* icomoon */
 @font-face {
   font-family: "icomoon";
   src: url("fonts/icomoon.eot?1nrm9o");
@@ -60,7 +59,7 @@ html {
 body {
   width: 100%;
   height: 100%;
-  background-color: black;
+  background-color: #0d052b;
   margin: 0;
   padding: 0;
   position: absolute;
@@ -84,6 +83,7 @@ canvas {
 #c {
   left: 0;
   transition: all 0.3s ease-in-out;
+  mix-blend-mode: exclusion;
 }
 
 #cX {
@@ -103,7 +103,7 @@ canvas {
   height: 3rem;
   width: 3rem;
   background-color: transparent;
-  background-image: url("./images/circle-trigger.svg");
+  background-image: url("./images/circle-trigger.png");
   background-size: cover;
   border: none;
   z-index: 500;
@@ -112,7 +112,6 @@ canvas {
   left: calc(50% - 1.5rem);
   transform: rotate(0deg);
   transition: 0.5s all ease-in-out;
-  filter: blur(0.75px);
 }
 #menu-toggle:hover {
   transform: rotate(180deg);
@@ -122,7 +121,7 @@ canvas {
   height: 3rem;
   width: 3rem;
   background-color: transparent;
-  background-image: url("./images/back-button.svg");
+  background-image: url("./images/back-button.png");
   background-size: cover;
   border: none;
   z-index: 500;
@@ -132,7 +131,6 @@ canvas {
   transform: rotate(0deg);
   transition: 0.5s all ease-in-out;
   display: none;
-  filter: blur(0.75px);
 }
 #reset:hover {
   transform: rotate(-180deg);
@@ -190,9 +188,9 @@ canvas {
 }
 #radial-ui .play-wrapper {
   position: absolute;
-  height: calc(100% - 8rem);
-  left: calc(40% + 1.5rem);
-  top: 4rem;
+  height: 80%;
+  left: calc(44%);
+  top: 10%;
 }
 #radial-ui #play-1 {
   background-image: url("./images/button-1.png");
@@ -242,7 +240,7 @@ canvas {
 #radial-ui #text-toggle {
   position: absolute;
   height: 20%;
-  left: 40%;
+  left: 42%;
   top: 40%;
   background: transparent;
   background-image: url("./images/text-2.png");
@@ -367,17 +365,84 @@ canvas.lights.flipped {
   #text-wrapper {
     left: 0;
   }
-
-  .play-wrapper {
-    height: calc(100% - 2rem);
-    left: calc(40% + 0.5rem);
-    top: 1rem;
-  }
 }
 @media (orientation: portrait) and (max-width: 768px) {
   #radial-ui {
-    width: calc(100vw - 2rem) !important;
+    width: calc(100vw - 40px) !important;
     max-width: unset;
+  }
+}
+.shake-effect {
+  animation: shake 0.3s;
+  animation-iteration-count: 1;
+}
+
+@keyframes shake {
+  0% {
+    transform: translate(2px, 2px);
+  }
+  10% {
+    transform: translate(-2px, -4px);
+  }
+  20% {
+    transform: translate(-6px, 0px);
+  }
+  30% {
+    transform: translate(6px, 4px);
+  }
+  40% {
+    transform: translate(2px, -2px);
+  }
+  50% {
+    transform: translate(-2px, 4px);
+  }
+  60% {
+    transform: translate(-6px, 2px);
+  }
+  70% {
+    transform: translate(6px, 2px);
+  }
+  80% {
+    transform: translate(-2px, -2px);
+  }
+  90% {
+    transform: translate(2px, 4px);
+  }
+  100% {
+    transform: translate(2px, -4px);
+  }
+}
+@media screen and (min--moz-device-pixel-ratio: 0) {
+  #radial-ui .play-wrapper {
+    left: 50%;
+  }
+
+  #radial-ui .play-wrapper {
+    transform: rotate(-10deg);
+  }
+
+  #radial-ui #play-wrapper-2 {
+    transform: rotate(41deg);
+  }
+
+  #radial-ui #play-wrapper-3 {
+    transform: rotate(92deg);
+  }
+
+  #radial-ui #play-wrapper-4 {
+    transform: rotate(143deg);
+  }
+
+  #radial-ui #play-wrapper-5 {
+    transform: rotate(194deg);
+  }
+
+  #radial-ui #play-wrapper-6 {
+    transform: rotate(245deg);
+  }
+
+  #radial-ui #play-wrapper-7 {
+    transform: rotate(296deg);
   }
 }
 
