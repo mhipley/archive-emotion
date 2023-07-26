@@ -389,6 +389,7 @@ const content = {
       var x = document.getElementById("text-modal");
       x.style.opacity = "0";
       x.style.pointerEvents = "none";
+      typewriter.pause();
       // fwdText();
     }
 
@@ -908,40 +909,49 @@ var typewriter = new Typewriter(animatedText,
   });
 
 typewriter.pauseFor(1000)
-  .typeString('Look back to a past moment and the view widens as we keep growing distant. A new topology forms.')
+  .typeString('Looking back to a familiar moment in the past, the view widens as we grow ever more distant. New topologies become visible.')
   .pauseFor(1000)
   .pasteString('<br>')
-  .typeString('Sometimes this shape gifts deeper understanding, but sometimes we see something that was never real.')
+  .typeString('Sometimes this shape gifts deeper understanding. But sometimes we see something that was never real.')
   .pauseFor(1000)
   .pasteString('<br>')
   .typeString('There is nothing solid in sand.')
   .pauseFor(1000)
   .pasteString('<br>')
-  .typeString('Maybe archives can help us remember, and shelter our memories from the distorting flow of time.')
+  .typeString('Archiving is a way to remember that shelters our memories from this distorting flow of time.')
   .pauseFor(1000)
   .pasteString('<br>')
-  .typeString('Archives transfigure ephemera and trace an outline around the fragments within to give them familiar form.')
+  .typeString('Often disguising the subjective as objective, archives can still offer a way to make sense of the past.')
+  .pauseFor(1000)
+  .pasteString('<br>')
+  .typeString('Archives do this by being a container for what we place inside. They trace an outline around the fragments within, giving them form.')
   .pauseFor(1000)
   .pasteString('<br>')
   .typeString('This is how the archive becomes a stable location. A firm foundation - from which we can take flight.')
   .pauseFor(1000)
   .pasteString('<br>')
-  .typeString('Because archiving is time travel.')
+  .typeString("Because archiving is time travel.")
   .pauseFor(1000)
   .pasteString('<br>')
-  .typeString("By holding our memories in time, the archive is a place we can return to - even though there's no way back.")
+  .typeString('By holding our memories in time, the archive becomes a place we can return to - even though there\'s no way back.')
   .pauseFor(1000)
   .pasteString('<br>')
   .typeString('As the past prints the future into the present, this portal also goes forward.')
   .pauseFor(1000)
   .pasteString('<br>')
-  .typeString('The archive is an object through which a message can be sent.')
+  .typeString('This archive is an object through which a message can be sent.')
   .pauseFor(1000)
   .pasteString('<br>')
   .typeString('Within a future, and in all the din, one more beacon.')
   .pauseFor(1000)
   .pasteString('<br>')
-  .typeString('He was here, and I loved him.');
+  .typeString('He was here, and I loved him.')
+  .pauseFor(1000)
+  .pasteString('<br>')
+  .typeString('-')
+  .pauseFor(1000)
+  .pasteString('<br>')
+  .typeString('transmitter@archive-emotion.xyz');
 
 
       //skip text animation
