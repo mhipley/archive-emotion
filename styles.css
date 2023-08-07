@@ -59,7 +59,7 @@ html {
 body {
   width: 100%;
   height: 100%;
-  background-color: #0d052b;
+  background-color: black;
   margin: 0;
   padding: 0;
   position: absolute;
@@ -83,7 +83,6 @@ canvas {
 #c {
   left: 0;
   transition: all 0.3s ease-in-out;
-  mix-blend-mode: exclusion;
 }
 
 #cX {
@@ -100,11 +99,11 @@ canvas {
 }
 
 .menu-toggle-wrapper {
-  height: 3rem;
-  width: 3rem;
+  height: 5rem;
+  width: 5rem;
   position: absolute;
   bottom: 2rem;
-  left: calc(50% - 1.5rem);
+  left: calc(50% - 2.5rem);
 }
 .menu-toggle-wrapper #menu-toggle {
   height: 100%;
@@ -113,6 +112,7 @@ canvas {
   background-image: url("./images/circle-trigger.png");
   background-size: cover;
   border: none;
+  position: relative;
   z-index: 500;
   transform: rotate(0deg);
   transition: 0.5s all ease-in-out;
@@ -120,7 +120,7 @@ canvas {
 .menu-toggle-wrapper #menu-toggle:hover {
   transform: rotate(180deg);
 }
-.menu-toggle-wrapper .menu-toggle-blur {
+.menu-toggle-wrapper #menu-toggle-blur {
   box-shadow: 0px 0px 20px 15px #b0f7ff;
   background-color: #b0f7ff;
   width: 0;
@@ -128,23 +128,23 @@ canvas {
   position: absolute;
   top: 0;
   left: 0;
-  z-index: -2;
+  z-index: 0;
   border-radius: 100%;
   left: 50%;
   top: 50%;
   opacity: 0.8;
   transition: 1s all ease-in-out;
 }
-.menu-toggle-wrapper:hover .menu-toggle-blur {
-  opacity: 0;
-}
-.menu-toggle-wrapper.clicked .menu-toggle-blur {
+.menu-toggle-wrapper #menu-toggle-blur.clicked {
   display: none;
+}
+.menu-toggle-wrapper:hover #menu-toggle-blur {
+  opacity: 0;
 }
 
 #reset {
-  height: 3rem;
-  width: 3rem;
+  height: 5rem;
+  width: 5rem;
   background-color: transparent;
   background-image: url("./images/back-button.png");
   background-size: cover;
@@ -152,7 +152,7 @@ canvas {
   z-index: 500;
   position: absolute;
   top: 2rem;
-  left: calc(50% - 1.5rem);
+  left: calc(50% - 2.5rem);
   transform: rotate(0deg);
   transition: 0.5s all ease-in-out;
   display: none;
@@ -171,7 +171,7 @@ canvas {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(13, 5, 43, 0.75);
+  background-color: rgba(0, 0, 0, 0.75);
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -220,6 +220,27 @@ canvas {
 }
 #radial-ui #play-1 {
   background-image: url("./images/button-1.png");
+  position: relative;
+  z-index: 1;
+}
+#radial-ui #play-wrapper-1:hover #song-blur {
+  opacity: 0;
+}
+#radial-ui #song-blur {
+  box-shadow: 0px 0px 40px 40px #b0f7ff;
+  background-color: #b0f7ff;
+  width: 0;
+  height: 0;
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  z-index: 0;
+  border-radius: 100%;
+  opacity: 0.8;
+  transition: 1s all ease-in-out;
+}
+#radial-ui #song-blur.clicked {
+  display: none;
 }
 #radial-ui #play-wrapper-2 {
   transform: rotate(51deg);
@@ -318,7 +339,6 @@ canvas {
 #text br {
   display: block;
   content: "";
-  margin: 20px 0;
 }
 #text #animated-text {
   padding: 0 2rem 1rem 2rem;
@@ -326,7 +346,6 @@ canvas {
 #text #animated-text br {
   display: block;
   content: "";
-  margin: 20px 0;
 }
 #text #screen-reader {
   opacity: 0;
@@ -339,7 +358,7 @@ canvas {
 #modal-overlay {
   width: 100%;
   height: 100%;
-  background-color: #0d052b;
+  background-color: black;
   opacity: 0.75;
   position: absolute;
 }

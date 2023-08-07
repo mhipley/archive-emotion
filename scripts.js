@@ -74,13 +74,13 @@ function loadImage(v, start) {
     let now = Date.now();
     let elapsed = now - start;
     let multiplier = MIN_ZOOM + (elapsed/1500);
-    let zoom = 1;
+    let zoom = 1.1;
 
 
-    if (multiplier <= 1) {
+    if (multiplier <= 1.1) {
       zoom = multiplier;
     } else {
-      zoom = 1;
+      zoom = 1.1;
       if (hasZoomed === false) {
         bumpImage();
       }
@@ -134,7 +134,7 @@ const content = {
             opacity: "1",
             title: "Opening",
             desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare libero vel erat facilisis facilisis. Aenean tempus augue ante, sit amet lacinia felis semper quis.",
-            maxOffset: 0,
+            maxOffset: 10,
             bpm: 91
         },
         {
@@ -146,7 +146,7 @@ const content = {
             audio: "audio/02.wav",
             title: "Dreams",
             desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare libero vel erat facilisis facilisis. Aenean tempus augue ante, sit amet lacinia felis semper quis.",
-            maxOffset: 0,
+            maxOffset: 10,
             bpm: 130
         },
         {
@@ -158,11 +158,11 @@ const content = {
             audio: "audio/03.wav",
             title: "Home",
             desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare libero vel erat facilisis facilisis. Aenean tempus augue ante, sit amet lacinia felis semper quis.",
-            maxOffset: 0,
+            maxOffset: 50,
             bpm: 84
         },
         {
-            video: "videos/Video_Glitch_2407.mp4",
+            video: "videos/Video4.mp4",
             blendMode: "hard-light",
             filter: "blur(15px) drop-shadow(0 0 30px rgba(51,180,172,1)",
             baseColor: "rgb(255, 200, 220)",
@@ -170,7 +170,7 @@ const content = {
             audio: "audio/04.wav",
             title: "Rest Rework",
             desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare libero vel erat facilisis facilisis. Aenean tempus augue ante, sit amet lacinia felis semper quis.",
-            maxOffset: 1,
+            maxOffset: 500,
             bpm: 139
         },
         {
@@ -182,7 +182,7 @@ const content = {
             audio: "audio/05.wav",
             title: "Gentle Night",
             desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare libero vel erat facilisis facilisis. Aenean tempus augue ante, sit amet lacinia felis semper quis.",
-            maxOffset: 0,
+            maxOffset: 10,
             bpm: 120
         },
         {
@@ -194,7 +194,7 @@ const content = {
             audio: "audio/06.wav",
             title: "Lost in Time",
             desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare libero vel erat facilisis facilisis. Aenean tempus augue ante, sit amet lacinia felis semper quis.",
-            maxOffset: 0,
+            maxOffset: 50,
             bpm: 90
         },
         {
@@ -206,7 +206,7 @@ const content = {
             audio: "audio/07.wav",
             title: "Rest",
             desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare libero vel erat facilisis facilisis. Aenean tempus augue ante, sit amet lacinia felis semper quis.",
-            maxOffset: 0,
+            maxOffset: 10,
             bpm: 69
         },
     ]
@@ -280,14 +280,16 @@ const content = {
 
       var maximum;
 
-      if (content.songs[active].maxOffset === 0 )
-      {
-        maximum = 10;
+      maximum = content.songs[active].maxOffset;
 
-      } else {
-        // maximum = canvas.width/4;
-        maximum = 300;
-      }
+      // if (content.songs[active].maxOffset === 0 )
+      // {
+      //   maximum = 10;
+
+      // } else {
+      //   // maximum = canvas.width/4;
+      //   maximum = 300;
+      // }
     
       function convertRange( value, r1, r2 ) { 
         return ( value - r1[ 0 ] ) * ( r2[ 1 ] - r2[ 0 ] ) / ( r1[ 1 ] - r1[ 0 ] ) + r2[ 0 ];
@@ -317,29 +319,6 @@ const content = {
 
       cloneLights(lightsCanvas);
 
-      // // audio analyser
-      // const bufferLength = analyser.frequencyBinCount;
-      // const freqArray = new Uint8Array(bufferLength);
-      // analyser.getByteFrequencyData(freqArray);
-
-      // const waveArray = new Float32Array(bufferLength);
-      // analyser.getFloatTimeDomainData(waveArray);
-
-      // var maximum;
-
-      // if (content.songs[active].maxOffset === 0 )
-      // {
-      //   maximum = 6;
-
-      // } else {
-      //   maximum = canvas.width/4;
-      // }
-    
-      // function convertRange( value, r1, r2 ) { 
-      //   return ( value - r1[ 0 ] ) * ( r2[ 1 ] - r2[ 0 ] ) / ( r1[ 1 ] - r1[ 0 ] ) + r2[ 0 ];
-      // }
-      // var offset = convertRange(waveArray[0], [0, 1], [0 , maximum]);
-
       back.width = canvas.width;
       back.height = canvas.height;
       if (v.paused || v.ended) return false;
@@ -350,8 +329,6 @@ const content = {
       } else {
         bumper = (canvas.height - canvas.width)/2;
       }
-
-
       
       // First, draw it into the backing canvases
       bc.drawImage(v, 0, 0, scale, scale);
@@ -367,8 +344,6 @@ const content = {
       // Draw the pixels onto the visible canvas
       c.putImageData(idata, (bumper), 0);
       cx.putImageData(idata, (bumper), 0);
-
-
       
       // Start over!
       setTimeout(function () {
@@ -396,6 +371,8 @@ const content = {
     function toggleMenu() {
       var x = document.getElementById("ui");
       x.classList.toggle("active");
+      var y = document.getElementById("menu-toggle-blur");
+      y.classList.add("clicked");
     }
 
     function reset() {
@@ -430,6 +407,8 @@ const content = {
       y.style.opacity = content.songs[songId].opacity;
       var reset = document.getElementById("reset");
       reset.classList.add("active");
+      var y = document.getElementById("song-blur");
+      y.classList.add("clicked");
 
   }
 
