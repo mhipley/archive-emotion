@@ -19,7 +19,6 @@ var xPos = 0;
 var mDur;
 var bpm;
 var hasZoomed = false;
-
 var cw, ch, cx, scale, active;
 
 function fitCanvas() {
@@ -121,7 +120,6 @@ preload.src = "https://marthahipley.com/archive-emotion/images/still-final-blk.j
 preload.onload = function () {
   loadImage(v, start);
 };    
-    
 
 const content = {
     songs: [
