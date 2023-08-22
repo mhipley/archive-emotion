@@ -83,15 +83,18 @@
   #c {
     left: 0;
     transition: all 0.3s ease-in-out;
+
   }
 
   #cX {
     left: 0;
     transition: all 0.3s ease-in-out;
+    mix-blend-mode: lighten;
+    opacity: 0;
   }
   
   #video-preloader {
-    opacity: 0;
+
   }
   
   #preload {
@@ -442,10 +445,6 @@ canvas.lights{
 
 }
 
-#cX {
-  mix-blend-mode: lighten;
-}
-
 
 
 @media (max-width: 768px) {
@@ -536,4 +535,44 @@ canvas.lights{
   #radial-ui #play-wrapper-7 {
     transform: rotate(296deg);
   }
+}
+
+// PERFORMANCE TEST
+#video-preloader {
+  position: absolute;
+  z-index: -5;
+  pointer-events: none;
+  right: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  margin: auto;
+  opacity: 0;
+}
+
+#video {
+  display: none;
+}
+
+#video1 {
+  width: 80%;
+  aspect-ratio: 1 / 1;
+  max-height: 80%;
+  transition: all 0.3s ease-in-out;
+  mix-blend-mode: lighten;
+  margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+}
+
+
+#video2 {
+  width: 80%;
+  aspect-ratio: 1 / 1;
+  max-height: 80%;
+  transition: all 0.3s ease-in-out;
+  mix-blend-mode: lighten;
+  margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
 }

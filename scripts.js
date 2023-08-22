@@ -1,7 +1,10 @@
 var a = document.getElementById("audio");
-var v = document.getElementById("video");
+// var v = document.getElementById("video");
 var vPrev = document.getElementById("video-prev");
 var vNext = document.getElementById("video-next");
+var vidWrap = document.getElementById("video-preloader");
+var vLeft = document.getElementById("video1");
+var vRight = document.getElementById("video2");
 var canvas = document.getElementById("c");
 var lightsCanvas = document.getElementById("l");
 var context = canvas.getContext("2d");
@@ -21,6 +24,7 @@ var bpm;
 var hasZoomed = false;
 var cw, ch, cx, scale, active;
 
+
 function fitCanvas() {
   cw = window.innerWidth;
   ch = window.innerHeight;
@@ -28,15 +32,19 @@ function fitCanvas() {
   if (cw >= ch) {
     canvas.width = cw *.8;
     canvas.height = ch *.8;
-    transCanvas.width = cw * .8;
-    transCanvas.height = ch * .8;
-    scale = canvas.height * .8;
+    // transCanvas.width = cw * .8;
+    // transCanvas.height = ch * .8;
+    vidWrap.width = cw *.8;
+    vidWrap.height = ch *.8;
+    scale = vidWrap.height * .8;
   } else {
     canvas.width = cw * .8;
     canvas.height = cw * .8;
-    transCanvas.width = cw * .8;
-    transCanvas.height = cw * .8;
-    scale = canvas.width * .8;
+    // transCanvas.width = cw * .8;
+    // transCanvas.height = cw * .8;
+    vidWrap.width = cw * .8;
+    vidWrap.height = cw * .8;
+    scale = vidWrap.width * .8;
   }
 }
 
@@ -65,9 +73,9 @@ fitCanvas();
 
 let start = Date.now();
 
-function loadImage(v, start) {
+function loadImage(vLeft, start) {
   fitCanvas();
-  if (v.paused) {
+  if (vLeft.paused) {
     let MAX_ZOOM = 1;
     let MIN_ZOOM = .01;
     let now = Date.now();
@@ -110,7 +118,7 @@ function loadImage(v, start) {
 
   // Start over!
   setTimeout(function () {
-    loadImage(v, start);
+    loadImage(vLeft, start);
   }, 0);
 
 }
@@ -118,7 +126,7 @@ function loadImage(v, start) {
 var preload = new Image();
 preload.src = "https://marthahipley.com/archive-emotion/images/still-final-blk.jpg";
 preload.onload = function () {
-  loadImage(v, start);
+  loadImage(vLeft, start);
 };    
 
 const content = {
@@ -210,7 +218,7 @@ const content = {
     ]
 }
 
-    v.addEventListener(
+    vLeft.addEventListener(
       "play",
       () => {
 
@@ -225,23 +233,23 @@ const content = {
           audioSrc.connect(analyser);
           analyser.connect(audioContext.destination);
           analyser.fftSize = 32;
-          drawVideo(v, context, backcontext, cXcontext, Date.now());
+          // drawVideo(v, context, backcontext, cXcontext, Date.now());
           audioContext.resume();
           playMusic();
+          
           var au = document.getElementById("audio");
           au.onloadedmetadata = function() {
               duration = au.duration;
               bpm = content.songs[active].bpm;
               mDur = ((duration / 60)*bpm) * 2;
               var n = 0;
-
-              bumpVideo(canvas, transCanvas, n);
+              bumpVideo(vLeft, vRight, n);
           };
       },
       false
     );
     
-    v.addEventListener(
+    vLeft.addEventListener(
       "pause",
       () => {
         pauseMusic();
@@ -263,7 +271,7 @@ const content = {
       snd.play();
     }
 
-    function bumpVideo(c, cx, n) {
+    function bumpVideo(vLeft, vRight, n) {
       // update n
       n++;
       // audio analyser
@@ -280,6 +288,8 @@ const content = {
 
       maximum = content.songs[active].maxOffset;
 
+      redrawClone();
+
       // if (content.songs[active].maxOffset === 0 )
       // {
       //   maximum = 10;
@@ -294,20 +304,27 @@ const content = {
       }
       var offset = convertRange(waveArray[0], [0, 1], [0 , maximum]);
 
-      c.style.left = offset + "px";
-      cx.style.left = -offset + "px";
+      vLeft.style.left = offset + "px";
+      vRight.style.left = -offset + "px";
 
       // Start over!
       if (n < mDur) {
         moveTimeout = setTimeout(function () {
-          bumpVideo(c, cx, n);
+          bumpVideo(vLeft, vRight, n);
         }, freq);
       }
       else {
-        c.style.left = "0px";
-        cx.style.left = "0px";
+        vLeft.style.left = "0px";
+        vRight.style.left = "0px";
         return;
       }
+    }
+
+    function redrawClone() {
+      cloneLights(lightsCanvas);
+      setTimeout(function () {
+        redrawClone();
+      }, 0);
     }
     
     function drawVideo(v, c, bc, cx, start) {
@@ -315,7 +332,7 @@ const content = {
       fitCanvas();
       scale = canvas.height;
 
-      cloneLights(lightsCanvas);
+      // cloneLights(lightsCanvas);
 
       back.width = canvas.width;
       back.height = canvas.height;
@@ -382,16 +399,23 @@ const content = {
       x.classList.remove("active");
       var y = document.getElementById("l-rev");
       y.classList.remove("active");
-      v.pause();
-      loadImage(v, start);
+      vLeft.pause();
+      vRight.pause();
+      loadImage(vLeft, start);
 
     }
 
     function play(songId) {      
       active = songId;
-      v.src = content.songs[songId].video;
+      // v.src = content.songs[songId].video;
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      vidWrap.style.opacity = "1";
+      vLeft.src = content.songs[songId].video;
+      vRight.src = content.songs[songId].video;
       a.src = content.songs[songId].audio;
-      v.play();
+      // v.play();
+      vLeft.play();
+      vRight.play();
       var x = document.getElementById("l");
       x.classList.add("active");
       x.style.mixBlendMode = content.songs[songId].blendMode;
