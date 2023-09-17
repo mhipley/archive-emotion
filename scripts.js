@@ -1,4 +1,5 @@
 var a = document.getElementById("audio");
+a.volume = 1;
 // var v = document.getElementById("video");
 var vPrev = document.getElementById("video-prev");
 var vNext = document.getElementById("video-next");
@@ -23,6 +24,7 @@ var mDur;
 var bpm;
 var hasZoomed = false;
 var cw, ch, cx, scale, active;
+var loaderImage = document.getElementById("preload-image");
 
 
 function fitCanvas() {
@@ -71,63 +73,76 @@ window.addEventListener("resize", () => {
 
 fitCanvas();
 
+window.addEventListener('load', (event) => {
+  zoomImage();
+});
+
 let start = Date.now();
 
-function loadImage(vLeft, start) {
-  fitCanvas();
-  if (vLeft.paused) {
-    let MAX_ZOOM = 1;
-    let MIN_ZOOM = .01;
-    let now = Date.now();
-    let elapsed = now - start;
-    let multiplier = MIN_ZOOM + (elapsed/1500);
-    let zoom = 1.1;
-
-
-    if (multiplier <= 1.1) {
-      zoom = multiplier;
-    } else {
-      zoom = 1.1;
-      if (hasZoomed === false) {
-        bumpImage();
-      }
-      
-
-    }
-    let scaledSize = canvas.width * zoom;
-    let margin = ((canvas.width - scaledSize) / 2)/zoom;
-    var bumper;
-    if (cw >= ch) {
-      bumper = (canvas.width - canvas.height)/2;
-    } else {
-      bumper = (canvas.height - canvas.width)/2;
-    }
-    
-    let cameraOffset = { x: (margin + bumper), y: margin };
-    context.scale(zoom, zoom);
-    context.drawImage(preload, cameraOffset.x, cameraOffset.y, canvas.height, canvas.height);
-  }
-  else {
-    return false;
-  }
-  
-  function bumpImage() {
-    canvas.classList.add("shake-effect");
-    hasZoomed = true;
-  }
-
-  // Start over!
-  setTimeout(function () {
-    loadImage(vLeft, start);
-  }, 0);
-
+function bumpImage() {
+  loaderImage.classList.add("shake-effect");
+  hasZoomed = true;
 }
 
-var preload = new Image();
-preload.src = "https://marthahipley.com/archive-emotion/images/still-final-blk.jpg";
-preload.onload = function () {
-  loadImage(vLeft, start);
-};    
+function zoomImage() {
+  loaderImage.classList.add("zoom-effect");
+}
+
+// function loadImage(vLeft, start) {
+//   fitCanvas();
+//   if (vLeft.paused) {
+//     let MAX_ZOOM = 1;
+//     let MIN_ZOOM = .01;
+//     let now = Date.now();
+//     let elapsed = now - start;
+//     let multiplier = MIN_ZOOM + (elapsed/1500);
+//     let zoom = 1.1;
+
+
+//     if (multiplier <= 1.1) {
+//       zoom = multiplier;
+//     } else {
+//       zoom = 1.1;
+//       if (hasZoomed === false) {
+//         bumpImage();
+//       }
+      
+
+//     }
+//     let scaledSize = canvas.width * zoom;
+//     let margin = ((canvas.width - scaledSize) / 2)/zoom;
+//     var bumper;
+//     if (cw >= ch) {
+//       bumper = (canvas.width - canvas.height)/2;
+//     } else {
+//       bumper = (canvas.height - canvas.width)/2;
+//     }
+    
+//     let cameraOffset = { x: (margin + bumper), y: margin };
+//     context.scale(zoom, zoom);
+//     strScale = "scale(" + zoom + ")";
+//     console.log(strScale);
+//     // loaderImage.style.transform = strScale;
+//     // context.drawImage(preload, cameraOffset.x, cameraOffset.y, canvas.height, canvas.height);
+//   }
+//   else {
+//     return false;
+//   }
+  
+
+
+//   // Start over!
+//   setTimeout(function () {
+//     loadImage(vLeft, start);
+//   }, 0);
+
+// }
+
+// var preload = new Image();
+// preload.src = "https://marthahipley.com/archive-emotion/images/still-final-blk.jpg";
+// preload.onload = function () {
+//   loadImage(vLeft, start);
+// };    
 
 const content = {
     songs: [
@@ -135,12 +150,12 @@ const content = {
             video: "videos/Video1.mp4",
             blendMode: "screen",
             filter: "blur(15px) drop-shadow(0 0 30px rgba(51,180,172,1)",
-            audio: "audio/01.wav",
+            audio: "audio/1.mp3",
             baseColor: "rgb(255, 200, 220)",
             opacity: "1",
             title: "Opening",
             desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare libero vel erat facilisis facilisis. Aenean tempus augue ante, sit amet lacinia felis semper quis.",
-            maxOffset: 10,
+            maxOffset: 50,
             bpm: 91
         },
         {
@@ -149,10 +164,10 @@ const content = {
             filter: "blur(15px) drop-shadow(0 0 30px #e47e30) hue-rotate(210deg)",
             baseColor: "rgb(255, 200, 220)",
             opacity: "1",
-            audio: "audio/02.wav",
+            audio: "audio/2.mp3",
             title: "Dreams",
             desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare libero vel erat facilisis facilisis. Aenean tempus augue ante, sit amet lacinia felis semper quis.",
-            maxOffset: 10,
+            maxOffset: 50,
             bpm: 130
         },
         {
@@ -161,10 +176,10 @@ const content = {
             filter: "blur(15px) drop-shadow(0 0 30px #33B4AC) hue-rotate(45deg)",
             baseColor: "rgb(255, 200, 220)",
             opacity: "1",
-            audio: "audio/03.wav",
+            audio: "audio/3.mp3",
             title: "Home",
             desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare libero vel erat facilisis facilisis. Aenean tempus augue ante, sit amet lacinia felis semper quis.",
-            maxOffset: 50,
+            maxOffset: 100,
             bpm: 84
         },
         {
@@ -173,10 +188,10 @@ const content = {
             filter: "blur(15px) drop-shadow(0 0 30px rgba(51,180,172,1)",
             baseColor: "rgb(255, 200, 220)",
             opacity: "1",
-            audio: "audio/04.wav",
+            audio: "audio/4.mp3",
             title: "Rest Rework",
             desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare libero vel erat facilisis facilisis. Aenean tempus augue ante, sit amet lacinia felis semper quis.",
-            maxOffset: 500,
+            maxOffset: 700,
             bpm: 139
         },
         {
@@ -185,10 +200,10 @@ const content = {
             filter: "blur(15px) drop-shadow(0 0 30px #A7FFFA) hue-rotate(45deg)",
             baseColor: "rgb(255, 200, 220)",
             opacity: "1",
-            audio: "audio/05.wav",
+            audio: "audio/5.mp3",
             title: "Gentle Night",
             desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare libero vel erat facilisis facilisis. Aenean tempus augue ante, sit amet lacinia felis semper quis.",
-            maxOffset: 10,
+            maxOffset: 50,
             bpm: 120
         },
         {
@@ -197,10 +212,10 @@ const content = {
             filter: "blur(15px) drop-shadow(0 0 30px #A7FFFA) hue-rotate(45deg)",
             baseColor: "rgb(255, 200, 220)",
             opacity: "1",
-            audio: "audio/06.wav",
+            audio: "audio/6.mp3",
             title: "Lost in Time",
             desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare libero vel erat facilisis facilisis. Aenean tempus augue ante, sit amet lacinia felis semper quis.",
-            maxOffset: 50,
+            maxOffset: 100,
             bpm: 90
         },
         {
@@ -209,10 +224,10 @@ const content = {
             filter: "blur(15px) drop-shadow(0 0 30px rgba(51,180,172,1)",
             baseColor: "rgb(255, 200, 220)",
             opacity: ".5",
-            audio: "audio/07.wav",
+            audio: "audio/7.mp3",
             title: "Rest",
             desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare libero vel erat facilisis facilisis. Aenean tempus augue ante, sit amet lacinia felis semper quis.",
-            maxOffset: 10,
+            maxOffset: 50,
             bpm: 69
         },
     ]
@@ -401,7 +416,8 @@ const content = {
       y.classList.remove("active");
       vLeft.pause();
       vRight.pause();
-      loadImage(vLeft, start);
+      // loadImage(vLeft, start);
+      loaderImage.style.opacity = "1";
 
     }
 
@@ -409,6 +425,7 @@ const content = {
       active = songId;
       // v.src = content.songs[songId].video;
       context.clearRect(0, 0, canvas.width, canvas.height);
+      loaderImage.style.opacity = "0";
       vidWrap.style.opacity = "1";
       vLeft.src = content.songs[songId].video;
       vRight.src = content.songs[songId].video;
