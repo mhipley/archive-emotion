@@ -1,6 +1,7 @@
+// Code by Martha Hipley
+// everyoneisugly.com
+
 var a = document.getElementById("audio");
-a.volume = 1;
-// var v = document.getElementById("video");
 var vPrev = document.getElementById("video-prev");
 var vNext = document.getElementById("video-next");
 var vidWrap = document.getElementById("video-preloader");
@@ -13,8 +14,6 @@ var back = document.createElement("canvas");
 var backcontext = back.getContext("2d", { willReadFrequently: true });
 var transCanvas = document.getElementById("cX");
 var cXcontext = transCanvas.getContext("2d");
-var audioContext = new AudioContext();
-var audioSrc = audioContext.createMediaElementSource(a);
 var active = 0;
 var songBPM;
 var moveTimeout;
@@ -25,8 +24,9 @@ var bpm;
 var hasZoomed = false;
 var cw, ch, cx, scale, active;
 var loaderImage = document.getElementById("preload-image");
+var audioContextExists = false;
 
-
+// resize canvas
 function fitCanvas() {
   cw = window.innerWidth;
   ch = window.innerHeight;
@@ -34,22 +34,19 @@ function fitCanvas() {
   if (cw >= ch) {
     canvas.width = cw *.8;
     canvas.height = ch *.8;
-    // transCanvas.width = cw * .8;
-    // transCanvas.height = ch * .8;
     vidWrap.width = cw *.8;
     vidWrap.height = ch *.8;
     scale = vidWrap.height * .8;
   } else {
     canvas.width = cw * .8;
     canvas.height = cw * .8;
-    // transCanvas.width = cw * .8;
-    // transCanvas.height = cw * .8;
     vidWrap.width = cw * .8;
     vidWrap.height = cw * .8;
     scale = vidWrap.width * .8;
   }
 }
 
+// mirror the northern lights effect
 function cloneLights(lightsCanvas) {
 
   //create a new canvas
@@ -87,8 +84,6 @@ function bumpImage() {
 function zoomImage() {
   loaderImage.classList.add("zoom-effect");
 }
-
-// function loadImage(vLeft, start) {
 //   fitCanvas();
 //   if (vLeft.paused) {
 //     let MAX_ZOOM = 1;
@@ -232,7 +227,6 @@ const content = {
         },
     ]
 }
-
     vLeft.addEventListener(
       "play",
       () => {
@@ -244,14 +238,19 @@ const content = {
           scale = canvas.width;
         }
           clearTimeout(moveTimeout);
-          analyser = audioContext.createAnalyser();
-          audioSrc.connect(analyser);
-          analyser.connect(audioContext.destination);
-          analyser.fftSize = 32;
-          // drawVideo(v, context, backcontext, cXcontext, Date.now());
-          audioContext.resume();
+          if (audioContextExists) {
+          } else {
+            var audioContext = new AudioContext();
+            var audioSrc = audioContext.createMediaElementSource(a);
+            audioContextExists = true;
+            analyser = audioContext.createAnalyser();
+            audioSrc.connect(analyser);
+            analyser.connect(audioContext.destination);
+            analyser.fftSize = 32;
+            audioContext.resume();
+          }
+       
           playMusic();
-          
           var au = document.getElementById("audio");
           au.onloadedmetadata = function() {
               duration = au.duration;
@@ -273,25 +272,22 @@ const content = {
     );
     
     function playMusic() {
+      a.volume = 1;
+      a.load();
       a.play();
     }
     
     function pauseMusic() {
       a.pause();
+      a.load();
     }
 
-    // helper for testing timings
-    function beep() {
-      var snd = new Audio("data:audio/wav;base64,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qJrx4KOQjahZxWbcZgztj2c49nKmkId44S71j0c8eV9yDK6uPRzx5X18eDvjvQ6yKo9ZSS6l//8elePK/Lf//IInrOF/FvDoADYAGBMGb7FtErm5MXMlmPAJQVgWta7Zx2go+8xJ0UiCb8LHHdftWyLJE0QIAIsI+UbXu67dZMjmgDGCGl1H+vpF4NSDckSIkk7Vd+sxEhBQMRU8j/12UIRhzSaUdQ+rQU5kGeFxm+hb1oh6pWWmv3uvmReDl0UnvtapVaIzo1jZbf/pD6ElLqSX+rUmOQNpJFa/r+sa4e/pBlAABoAAAAA3CUgShLdGIxsY7AUABPRrgCABdDuQ5GC7DqPQCgbbJUAoRSUj+NIEig0YfyWUho1VBBBA//uQZB4ABZx5zfMakeAAAAmwAAAAF5F3P0w9GtAAACfAAAAAwLhMDmAYWMgVEG1U0FIGCBgXBXAtfMH10000EEEEEECUBYln03TTTdNBDZopopYvrTTdNa325mImNg3TTPV9q3pmY0xoO6bv3r00y+IDGid/9aaaZTGMuj9mpu9Mpio1dXrr5HERTZSmqU36A3CumzN/9Robv/Xx4v9ijkSRSNLQhAWumap82WRSBUqXStV/YcS+XVLnSS+WLDroqArFkMEsAS+eWmrUzrO0oEmE40RlMZ5+ODIkAyKAGUwZ3mVKmcamcJnMW26MRPgUw6j+LkhyHGVGYjSUUKNpuJUQoOIAyDvEyG8S5yfK6dhZc0Tx1KI/gviKL6qvvFs1+bWtaz58uUNnryq6kt5RzOCkPWlVqVX2a/EEBUdU1KrXLf40GoiiFXK///qpoiDXrOgqDR38JB0bw7SoL+ZB9o1RCkQjQ2CBYZKd/+VJxZRRZlqSkKiws0WFxUyCwsKiMy7hUVFhIaCrNQsKkTIsLivwKKigsj8XYlwt/WKi2N4d//uQRCSAAjURNIHpMZBGYiaQPSYyAAABLAAAAAAAACWAAAAApUF/Mg+0aohSIRobBAsMlO//Kk4soosy1JSFRYWaLC4qZBYWFRGZdwqKiwkNBVmoWFSJkWFxX4FFRQWR+LsS4W/rFRb/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////VEFHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAU291bmRib3kuZGUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMjAwNGh0dHA6Ly93d3cuc291bmRib3kuZGUAAAAAAAAAACU=");  
-      snd.play();
-    }
-
+    // synchronize motion to audio analysis
     function bumpVideo(vLeft, vRight, n) {
       // update n
       n++;
       // audio analyser
       var freq = ((1000 * 60)/bpm)/2;
-      // beep();
       const bufferLength = analyser.frequencyBinCount;
       const freqArray = new Uint8Array(bufferLength);
       analyser.getByteFrequencyData(freqArray);
@@ -305,15 +301,6 @@ const content = {
 
       redrawClone();
 
-      // if (content.songs[active].maxOffset === 0 )
-      // {
-      //   maximum = 10;
-
-      // } else {
-      //   // maximum = canvas.width/4;
-      //   maximum = 300;
-      // }
-    
       function convertRange( value, r1, r2 ) { 
         return ( value - r1[ 0 ] ) * ( r2[ 1 ] - r2[ 0 ] ) / ( r1[ 1 ] - r1[ 0 ] ) + r2[ 0 ];
       }
@@ -342,13 +329,11 @@ const content = {
       }, 0);
     }
     
+    // draw video function - depreciated
     function drawVideo(v, c, bc, cx, start) {
 
       fitCanvas();
       scale = canvas.height;
-
-      // cloneLights(lightsCanvas);
-
       back.width = canvas.width;
       back.height = canvas.height;
       if (v.paused || v.ended) return false;
@@ -380,7 +365,6 @@ const content = {
         drawVideo(v, c, bc, cx, start);
       }, 0);
     }
-
     
     //toggle display of text modal
     function openText() {
@@ -395,7 +379,6 @@ const content = {
       x.style.opacity = "0";
       x.style.pointerEvents = "none";
       typewriter.pause();
-      // fwdText();
     }
 
     function toggleMenu() {
@@ -416,14 +399,12 @@ const content = {
       y.classList.remove("active");
       vLeft.pause();
       vRight.pause();
-      // loadImage(vLeft, start);
       loaderImage.style.opacity = "1";
 
     }
 
-    function play(songId) {      
+    function playTrack(songId) {      
       active = songId;
-      // v.src = content.songs[songId].video;
       context.clearRect(0, 0, canvas.width, canvas.height);
       loaderImage.style.opacity = "0";
       vidWrap.style.opacity = "1";
@@ -912,14 +893,8 @@ document.body.addEventListener('mousemove', function (e) {
   mouseYPercentage = e.clientY / window.innerHeight;
 })
 
-
-
-
-
-//typewriter
-
+//typewriter effect
 var animatedText = document.getElementById('animated-text');
-
 var typewriter = new Typewriter(animatedText,
   {
     loop: false,
@@ -971,9 +946,8 @@ typewriter.pauseFor(1000)
   .pasteString('<br>')
   .typeString('transmitter@archive-emotion.xyz');
 
-
-      //skip text animation
-      function fwdText() {
-        document.getElementById( 'animated-text' ).style.display = 'none';
-        document.getElementById( 'screen-reader' ).style.display = 'block';
-      }
+  //skip text animation - depreciated
+  // function fwdText() {
+  //   document.getElementById( 'animated-text' ).style.display = 'none';
+  //   document.getElementById( 'screen-reader' ).style.display = 'block';
+  // }

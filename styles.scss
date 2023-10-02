@@ -93,10 +93,6 @@
     opacity: 0;
   }
   
-  #video-preloader {
-
-  }
-  
   #preload {
     opacity: 0;
   }
@@ -119,11 +115,8 @@
       z-index: 500;
       transform: rotate(0deg);
       transition: .5s all ease-in-out;
-      // filter: blur(.75px);
-      // opacity: .5;
       &:hover {
           transform: rotate(180deg);
-          // opacity: 1;
       }
   
     }
@@ -171,11 +164,8 @@
     transform: rotate(0deg);
     transition: .5s all ease-in-out;
     display: none;
-    // filter: blur(.75px);
-    // opacity: .5;
     &:hover {
         transform: rotate(-180deg);
-        // opacity: 1;
     }
     &.active {
       display: block;
@@ -200,13 +190,11 @@
     margin: 0;
     padding: 0;
     opacity: 0;
-    // transform: translate3d(0, - 2rem, 0);
     transition: 1s all ease-in-out;
     pointer-events: none;
 
     &.active {
         opacity: 1;
-        // transform: translate3d(0, 0, 0);
         pointer-events: all;
     }
 
@@ -229,7 +217,6 @@
     .play-wrapper {
       display: block;
     }
-
 
     button {
         background-color: transparent;
@@ -340,10 +327,7 @@
         background: transparent;
         background-image: url('./images/text-2.png');
         background-size: contain;
-        
       }
-
-
   }
   
   
@@ -392,15 +376,12 @@
     br {
       display: block;
       content: "";
-      // margin: 20px 0;
-
     }
     #animated-text {
       padding: 0 2rem 1rem 2rem;
       br {
         display: block;
         content: "";
-        // margin: 20px 0;
       }
     }
     #screen-reader {
@@ -433,7 +414,6 @@
 }
   
 canvas.lights{
-    // filter: blur(15px) drop-shadow(0 0 30px rgba(51,180,172,1)); 
     transform: translateX(-30vw);
     mix-blend-mode: normal;
     transition: 1s all ease-in-out;
@@ -476,12 +456,6 @@ canvas.lights{
 
   }
 
-  #radial-ui .play-wrapper {
-    // height: calc(100% - 80px);
-    // left: calc(40% + 10px);
-    // top: 40px;
-  }
-
 
 }
 
@@ -494,41 +468,6 @@ canvas.lights{
     max-width: unset;
   }
 }
-
-//FIREFOX FIXES
-// @media screen and (min--moz-device-pixel-ratio:0) {
-
-//   #radial-ui {
-//     transform: translate(-4px, -50%);
-//   }
-//   #radial-ui #text-toggle {
-//     left: 40.5%;
-//   }
-//   #radial-ui .play-wrapper {
-//     left: calc(48% - 2px);
-//   }
-//   #radial-ui .play-wrapper {
-//     transform: rotate(-11deg);
-//   }
-//   #radial-ui #play-wrapper-2 {
-//     transform: rotate(41deg);
-//   }
-//   #radial-ui #play-wrapper-3 {
-//     transform: rotate(90deg);
-//   }
-//   #radial-ui #play-wrapper-4 {
-//     transform: rotate(139deg);
-//   }
-//   #radial-ui #play-wrapper-5 {
-//     transform: rotate(191deg);
-//   }
-//   #radial-ui #play-wrapper-6 {
-//     transform: rotate(242deg);
-//   }
-//   #radial-ui #play-wrapper-7 {
-//     transform: rotate(294deg);
-//   }
-// }
 
 // PERFORMANCE TEST
 #video-preloader {
@@ -605,7 +544,6 @@ canvas.lights{
   90% { transform: translate(2px, 4px); }
   100% { transform: translate(2px, -4px); }
 }
-
 
 .zoom-effect {
   animation: zoomIn 1s;
