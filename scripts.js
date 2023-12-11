@@ -301,32 +301,45 @@ const content = {
 
       redrawClone();
 
+
+
       function convertRange( value, r1, r2 ) { 
         return ( value - r1[ 0 ] ) * ( r2[ 1 ] - r2[ 0 ] ) / ( r1[ 1 ] - r1[ 0 ] ) + r2[ 0 ];
       }
       var offset = convertRange(waveArray[0], [0, 1], [0 , maximum]);
 
+
       vLeft.style.left = offset + "px";
       vRight.style.left = -offset + "px";
 
-      // Start over!
-      if (n < mDur) {
-        moveTimeout = setTimeout(function () {
-          bumpVideo(vLeft, vRight, n);
-        }, freq);
-      }
-      else {
-        vLeft.style.left = "0px";
-        vRight.style.left = "0px";
-        return;
-      }
+      // if (n < mDur) {
+      //   console.log(n);
+      //   console.log(mDur);
+      //   moveTimeout = setTimeout(function () {
+      //     console.log("new frame");
+      //     bumpVideo(vLeft, vRight, n);
+      //   }, freq);
+      // }
+      // else {
+      //   vLeft.style.left = "0px";
+      //   vRight.style.left = "0px";
+      //   return;
+      // }
+
+
+        moveTimeout = requestAnimationFrame(function () {
+            bumpVideo(vLeft, vRight, n);
+           });
     }
 
     function redrawClone() {
       cloneLights(lightsCanvas);
-      setTimeout(function () {
+      // setTimeout(function () {
+      //   redrawClone();
+      // }, 0);
+      requestAnimationFrame(function () {
         redrawClone();
-      }, 0);
+      });
     }
     
     // draw video function - depreciated
@@ -361,9 +374,14 @@ const content = {
       cx.putImageData(idata, (bumper), 0);
       
       // Start over!
-      setTimeout(function () {
+      // setTimeout(function () {
+      //   drawVideo(v, c, bc, cx, start);
+      // }, 0);
+
+      requestAnimationFrame(function () {
         drawVideo(v, c, bc, cx, start);
-      }, 0);
+      });
+      
     }
     
     //toggle display of text modal
