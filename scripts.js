@@ -150,7 +150,7 @@ const content = {
             opacity: "1",
             title: "Opening",
             desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare libero vel erat facilisis facilisis. Aenean tempus augue ante, sit amet lacinia felis semper quis.",
-            maxOffset: 50,
+            maxOffset: 70,
             bpm: 91
         },
         {
@@ -162,7 +162,7 @@ const content = {
             audio: "audio/02.mp3",
             title: "Dreams",
             desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare libero vel erat facilisis facilisis. Aenean tempus augue ante, sit amet lacinia felis semper quis.",
-            maxOffset: 50,
+            maxOffset: 70,
             bpm: 130
         },
         {
@@ -174,7 +174,7 @@ const content = {
             audio: "audio/03.mp3",
             title: "Home",
             desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare libero vel erat facilisis facilisis. Aenean tempus augue ante, sit amet lacinia felis semper quis.",
-            maxOffset: 100,
+            maxOffset: 70,
             bpm: 84
         },
         {
@@ -198,7 +198,7 @@ const content = {
             audio: "audio/05.mp3",
             title: "Gentle Night",
             desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare libero vel erat facilisis facilisis. Aenean tempus augue ante, sit amet lacinia felis semper quis.",
-            maxOffset: 50,
+            maxOffset: 70,
             bpm: 120
         },
         {
@@ -210,7 +210,7 @@ const content = {
             audio: "audio/06.mp3",
             title: "Lost in Time",
             desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare libero vel erat facilisis facilisis. Aenean tempus augue ante, sit amet lacinia felis semper quis.",
-            maxOffset: 100,
+            maxOffset: 70,
             bpm: 90
         },
         {
@@ -222,7 +222,7 @@ const content = {
             audio: "audio/07.mp3",
             title: "Rest",
             desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare libero vel erat facilisis facilisis. Aenean tempus augue ante, sit amet lacinia felis semper quis.",
-            maxOffset: 50,
+            maxOffset: 70,
             bpm: 69
         },
     ]
