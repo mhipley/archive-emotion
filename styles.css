@@ -107,7 +107,7 @@ canvas {
   height: 100%;
   width: 100%;
   background-color: transparent;
-  background-image: url("./images/circle-trigger.png");
+  background-image: url("./images/circle-trigger.webp");
   background-size: cover;
   border: none;
   position: relative;
@@ -144,7 +144,7 @@ canvas {
   height: 5rem;
   width: 5rem;
   background-color: transparent;
-  background-image: url("./images/back-button.png");
+  background-image: url("./images/back-button.webp");
   background-size: cover;
   border: none;
   z-index: 500;
@@ -192,7 +192,7 @@ canvas {
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
   margin: 0 auto;
-  background-image: url("./images/dial.png");
+  background-image: url("./images/dial.webp");
   background-size: cover;
 }
 #radial-ui .play-wrapper {
@@ -221,7 +221,7 @@ canvas {
   aspect-ratio: 1/5;
 }
 #radial-ui #play-1 {
-  background-image: url("./images/button-1.png");
+  background-image: url("./images/button-1.webp");
   position: relative;
   z-index: 1;
 }
@@ -249,42 +249,42 @@ canvas {
 }
 #radial-ui #play-2 {
   transform: rotate(-51deg);
-  background-image: url("./images/button-2.png");
+  background-image: url("./images/button-2.webp");
 }
 #radial-ui #play-wrapper-3 {
   transform: rotate(102deg);
 }
 #radial-ui #play-3 {
   transform: rotate(-102deg);
-  background-image: url("./images/button-3.png");
+  background-image: url("./images/button-3.webp");
 }
 #radial-ui #play-wrapper-4 {
   transform: rotate(153deg);
 }
 #radial-ui #play-4 {
   transform: rotate(-153deg);
-  background-image: url("./images/button-4.png");
+  background-image: url("./images/button-4.webp");
 }
 #radial-ui #play-wrapper-5 {
   transform: rotate(204deg);
 }
 #radial-ui #play-5 {
   transform: rotate(-204deg);
-  background-image: url("./images/button-5.png");
+  background-image: url("./images/button-5.webp");
 }
 #radial-ui #play-wrapper-6 {
   transform: rotate(255deg);
 }
 #radial-ui #play-6 {
   transform: rotate(-255deg);
-  background-image: url("./images/button-6.png");
+  background-image: url("./images/button-6.webp");
 }
 #radial-ui #play-wrapper-7 {
   transform: rotate(306deg);
 }
 #radial-ui #play-7 {
   transform: rotate(-306deg);
-  background-image: url("./images/button-7.png");
+  background-image: url("./images/button-7.webp");
 }
 #radial-ui #text-toggle {
   position: absolute;
@@ -293,7 +293,7 @@ canvas {
   left: 41%;
   top: 40%;
   background: transparent;
-  background-image: url("./images/text-2.png");
+  background-image: url("./images/text-2.webp");
   background-size: contain;
 }
 
