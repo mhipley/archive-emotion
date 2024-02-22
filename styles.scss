@@ -46,7 +46,7 @@
   }
   
   html {
-    font-family: "trade-gothic-next", sans-serif;
+    font-family: "trade-gothic-next", Tahoma, sans-serif;
     color: white;
     font-size: 16px;
     line-height: 1.5rem;
@@ -353,6 +353,8 @@
     float: left;
     left: 2rem;
     position: relative;
+    margin-right: 2rem;
+    padding-bottom: 2rem;
   }
   
   #text {
@@ -459,9 +461,20 @@ canvas.lights{
 
 }
 
-@media handheld and (orientation: landscape) {
+@media only screen and (max-height: 575.98px) and (orientation: landscape) {
 
+  #reset {
+    top: calc(50% - 2.5rem);
+    left: 5rem;
+    
+  }
+  .menu-toggle-wrapper {
+    bottom: calc(50% - 2.5rem);
+    right: 5rem;
+    left: unset;
+  }
 }
+
 @media (orientation: portrait) and (max-width: 768px) {
   #radial-ui {
     width: calc(100vw - 40px) !important;
@@ -482,6 +495,18 @@ canvas.lights{
   opacity: 0;
 }
 
+// .first-frame {
+//   width: 80%;
+//   height: 80%;
+//   position: relative;
+//   top: 10%;
+//   left: 10%;
+//   background-size: contain;
+//   background-repeat: no-repeat;
+//   background-position: center;
+//   z-index: -1;
+// }
+
 #video {
   display: none;
 }
@@ -495,6 +520,8 @@ canvas.lights{
   margin: auto;
   position: absolute;
   top: 0; left: 0; bottom: 0; right: 0;
+  // background: URL('/images/video1-first.png') no-repeat;
+  // background-size: cover;
 }
 
 

@@ -47,7 +47,7 @@
 }
 
 html {
-  font-family: "trade-gothic-next", sans-serif;
+  font-family: "trade-gothic-next", Tahoma, sans-serif;
   color: white;
   font-size: 16px;
   line-height: 1.5rem;
@@ -318,6 +318,8 @@ canvas {
   float: left;
   left: 2rem;
   position: relative;
+  margin-right: 2rem;
+  padding-bottom: 2rem;
 }
 
 #text {
@@ -401,6 +403,18 @@ canvas.lights.flipped {
 
   #text-wrapper {
     left: 0;
+  }
+}
+@media only screen and (max-height: 575.98px) and (orientation: landscape) {
+  #reset {
+    top: calc(50% - 2.5rem);
+    left: 5rem;
+  }
+
+  .menu-toggle-wrapper {
+    bottom: calc(50% - 2.5rem);
+    right: 5rem;
+    left: unset;
   }
 }
 @media (orientation: portrait) and (max-width: 768px) {

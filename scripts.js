@@ -1,5 +1,4 @@
 // Code by Martha Hipley
-// everyoneisugly.com
 
 var a = document.getElementById("audio");
 var vPrev = document.getElementById("video-prev");
@@ -84,65 +83,12 @@ function bumpImage() {
 function zoomImage() {
   loaderImage.classList.add("zoom-effect");
 }
-//   fitCanvas();
-//   if (vLeft.paused) {
-//     let MAX_ZOOM = 1;
-//     let MIN_ZOOM = .01;
-//     let now = Date.now();
-//     let elapsed = now - start;
-//     let multiplier = MIN_ZOOM + (elapsed/1500);
-//     let zoom = 1.1;
 
-
-//     if (multiplier <= 1.1) {
-//       zoom = multiplier;
-//     } else {
-//       zoom = 1.1;
-//       if (hasZoomed === false) {
-//         bumpImage();
-//       }
-      
-
-//     }
-//     let scaledSize = canvas.width * zoom;
-//     let margin = ((canvas.width - scaledSize) / 2)/zoom;
-//     var bumper;
-//     if (cw >= ch) {
-//       bumper = (canvas.width - canvas.height)/2;
-//     } else {
-//       bumper = (canvas.height - canvas.width)/2;
-//     }
-    
-//     let cameraOffset = { x: (margin + bumper), y: margin };
-//     context.scale(zoom, zoom);
-//     strScale = "scale(" + zoom + ")";
-//     console.log(strScale);
-//     // loaderImage.style.transform = strScale;
-//     // context.drawImage(preload, cameraOffset.x, cameraOffset.y, canvas.height, canvas.height);
-//   }
-//   else {
-//     return false;
-//   }
-  
-
-
-//   // Start over!
-//   setTimeout(function () {
-//     loadImage(vLeft, start);
-//   }, 0);
-
-// }
-
-// var preload = new Image();
-// preload.src = "https://marthahipley.com/archive-emotion/images/still-final-blk.jpg";
-// preload.onload = function () {
-//   loadImage(vLeft, start);
-// };    
 
 const content = {
     songs: [
         {   
-            video: "videos/Video1.mp4",
+            video: "videos/Video1-compressed.mp4",
             blendMode: "screen",
             filter: "blur(15px) drop-shadow(0 0 30px rgba(51,180,172,1)",
             audio: "audio/01.mp3",
@@ -154,7 +100,7 @@ const content = {
             bpm: 91
         },
         {
-            video: "videos/Video2.mp4",
+            video: "videos/Video2-compressed.mp4",
             blendMode: "screen",
             filter: "blur(15px) drop-shadow(0 0 30px #e47e30) hue-rotate(210deg)",
             baseColor: "rgb(255, 200, 220)",
@@ -166,7 +112,7 @@ const content = {
             bpm: 130
         },
         {
-            video: "videos/Video3.mp4",
+            video: "videos/Video3-compressed.mp4",
             blendMode: "screen",
             filter: "blur(15px) drop-shadow(0 0 30px #33B4AC) hue-rotate(45deg)",
             baseColor: "rgb(255, 200, 220)",
@@ -178,7 +124,7 @@ const content = {
             bpm: 84
         },
         {
-            video: "videos/Video4.mp4",
+            video: "videos/Video4-compressed.mp4",
             blendMode: "hard-light",
             filter: "blur(15px) drop-shadow(0 0 30px rgba(51,180,172,1)",
             baseColor: "rgb(255, 200, 220)",
@@ -190,7 +136,7 @@ const content = {
             bpm: 139
         },
         {
-            video: "videos/Video7.mp4",
+            video: "videos/Video7-compressed.mp4",
             blendMode: "screen",
             filter: "blur(15px) drop-shadow(0 0 30px #A7FFFA) hue-rotate(45deg)",
             baseColor: "rgb(255, 200, 220)",
@@ -202,7 +148,7 @@ const content = {
             bpm: 120
         },
         {
-            video: "videos/Video5.mp4",
+            video: "videos/Video5-compressed.mp4",
             blendMode: "screen",
             filter: "blur(15px) drop-shadow(0 0 30px #A7FFFA) hue-rotate(45deg)",
             baseColor: "rgb(255, 200, 220)",
@@ -214,7 +160,7 @@ const content = {
             bpm: 90
         },
         {
-            video: "videos/Video6.mp4",
+            video: "videos/Video6-compressed.mp4",
             blendMode: "normal",
             filter: "blur(15px) drop-shadow(0 0 30px rgba(51,180,172,1)",
             baseColor: "rgb(255, 200, 220)",
@@ -312,21 +258,6 @@ const content = {
       vLeft.style.left = offset + "px";
       vRight.style.left = -offset + "px";
 
-      // if (n < mDur) {
-      //   console.log(n);
-      //   console.log(mDur);
-      //   moveTimeout = setTimeout(function () {
-      //     console.log("new frame");
-      //     bumpVideo(vLeft, vRight, n);
-      //   }, freq);
-      // }
-      // else {
-      //   vLeft.style.left = "0px";
-      //   vRight.style.left = "0px";
-      //   return;
-      // }
-
-
         moveTimeout = requestAnimationFrame(function () {
             bumpVideo(vLeft, vRight, n);
            });
@@ -334,9 +265,7 @@ const content = {
 
     function redrawClone() {
       cloneLights(lightsCanvas);
-      // setTimeout(function () {
-      //   redrawClone();
-      // }, 0);
+
       requestAnimationFrame(function () {
         redrawClone();
       });
@@ -450,8 +379,71 @@ const content = {
 
   }
 
-/* NORTHERN LIGHTS */
 
+  
+
+
+//typewriter effect
+var animatedText = document.getElementById('animated-text');
+var typewriter = new Typewriter(animatedText,
+  {
+    loop: false,
+    delay: 50
+  });
+
+typewriter.pauseFor(1000)
+  .typeString('Looking back to a familiar moment in the past, the view widens as we grow ever more distant. New topologies become visible.')
+  .pauseFor(1000)
+  .pasteString('<br>')
+  .typeString('Sometimes this shape gifts deeper understanding. But sometimes we see something that was never real.')
+  .pauseFor(1000)
+  .pasteString('<br>')
+  .typeString('There is nothing solid in sand.')
+  .pauseFor(1000)
+  .pasteString('<br>')
+  .typeString('Archiving is a way to remember that shelters our memories from this distorting flow of time.')
+  .pauseFor(1000)
+  .pasteString('<br>')
+  .typeString('Often disguising the subjective as objective, archives can still offer a way to make sense of the past.')
+  .pauseFor(1000)
+  .pasteString('<br>')
+  .typeString('Archives do this by being a container for what we place inside. They trace an outline around the fragments within, giving them form.')
+  .pauseFor(1000)
+  .pasteString('<br>')
+  .typeString('This is how the archive becomes a stable location. A firm foundation - from which we can take flight.')
+  .pauseFor(1000)
+  .pasteString('<br>')
+  .typeString("Because archiving is time travel.")
+  .pauseFor(1000)
+  .pasteString('<br>')
+  .typeString('By holding our memories in time, the archive becomes a place we can return to - even though there\'s no way back.')
+  .pauseFor(1000)
+  .pasteString('<br>')
+  .typeString('As the past prints the future into the present, this portal also goes forward.')
+  .pauseFor(1000)
+  .pasteString('<br>')
+  .typeString('This archive is an object through which a message can be sent.')
+  .pauseFor(1000)
+  .pasteString('<br>')
+  .typeString('Within a future, and in all the din, one more beacon.')
+  .pauseFor(1000)
+  .pasteString('<br>')
+  .typeString('He was here, and I loved him.')
+  .pauseFor(1000)
+  .pasteString('<br>')
+  .typeString('-')
+  .pauseFor(1000)
+  .pasteString('<br>')
+  .typeString('transmitter@archive-emotion.xyz');
+
+  //skip text animation - depreciated
+  // function fwdText() {
+  //   document.getElementById( 'animated-text' ).style.display = 'none';
+  //   document.getElementById( 'screen-reader' ).style.display = 'block';
+  // }
+
+
+  /* NORTHERN LIGHTS */
 /**
  *  Makes a Canvas element that simulates Northern Lights
  */
@@ -466,7 +458,7 @@ var CURVE_POINT_MAX_FLOAT_Y_DIST = 80;
 var CURVE_POINT_MIN_FLOAT_DIST = 15;
 var CURVE_POINT_MAX_FLOAT_TIME = 9000; // longest a curve point can take to get to next keyframe
 var CURVE_POINT_MIN_FLOAT_TIME = 3000; // shortest a curve point can take to get to next keyframe
-var BRUSH_COUNT = 100;
+var BRUSH_COUNT = 50;
 var BRUSH_WIDTH = 100;
 var BRUSH_HEIGHT = 500;
 var BRUSH_MIN_SCALE_Y = .02;
@@ -910,62 +902,3 @@ document.body.addEventListener('mousemove', function (e) {
   mouseXPercentage = e.clientX / window.innerWidth;
   mouseYPercentage = e.clientY / window.innerHeight;
 })
-
-//typewriter effect
-var animatedText = document.getElementById('animated-text');
-var typewriter = new Typewriter(animatedText,
-  {
-    loop: false,
-    delay: 50
-  });
-
-typewriter.pauseFor(1000)
-  .typeString('Looking back to a familiar moment in the past, the view widens as we grow ever more distant. New topologies become visible.')
-  .pauseFor(1000)
-  .pasteString('<br>')
-  .typeString('Sometimes this shape gifts deeper understanding. But sometimes we see something that was never real.')
-  .pauseFor(1000)
-  .pasteString('<br>')
-  .typeString('There is nothing solid in sand.')
-  .pauseFor(1000)
-  .pasteString('<br>')
-  .typeString('Archiving is a way to remember that shelters our memories from this distorting flow of time.')
-  .pauseFor(1000)
-  .pasteString('<br>')
-  .typeString('Often disguising the subjective as objective, archives can still offer a way to make sense of the past.')
-  .pauseFor(1000)
-  .pasteString('<br>')
-  .typeString('Archives do this by being a container for what we place inside. They trace an outline around the fragments within, giving them form.')
-  .pauseFor(1000)
-  .pasteString('<br>')
-  .typeString('This is how the archive becomes a stable location. A firm foundation - from which we can take flight.')
-  .pauseFor(1000)
-  .pasteString('<br>')
-  .typeString("Because archiving is time travel.")
-  .pauseFor(1000)
-  .pasteString('<br>')
-  .typeString('By holding our memories in time, the archive becomes a place we can return to - even though there\'s no way back.')
-  .pauseFor(1000)
-  .pasteString('<br>')
-  .typeString('As the past prints the future into the present, this portal also goes forward.')
-  .pauseFor(1000)
-  .pasteString('<br>')
-  .typeString('This archive is an object through which a message can be sent.')
-  .pauseFor(1000)
-  .pasteString('<br>')
-  .typeString('Within a future, and in all the din, one more beacon.')
-  .pauseFor(1000)
-  .pasteString('<br>')
-  .typeString('He was here, and I loved him.')
-  .pauseFor(1000)
-  .pasteString('<br>')
-  .typeString('-')
-  .pauseFor(1000)
-  .pasteString('<br>')
-  .typeString('transmitter@archive-emotion.xyz');
-
-  //skip text animation - depreciated
-  // function fwdText() {
-  //   document.getElementById( 'animated-text' ).style.display = 'none';
-  //   document.getElementById( 'screen-reader' ).style.display = 'block';
-  // }

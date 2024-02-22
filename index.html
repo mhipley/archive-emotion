@@ -2,12 +2,13 @@
 <html lang="en">
   <head>
     <link rel="stylesheet" href="styles.css" />
-    <!-- <link rel="stylesheet" href="https://use.typekit.net/gyn3oyz.css"> -->
-    <link rel="stylesheet" href="https://use.typekit.net/gyn3oyz.css" media="print" onload="this.media='all'">
     <script src="https://unpkg.com/typewriter-effect@latest/dist/core.js"></script>
+    <link rel="stylesheet" href="https://use.typekit.net/gyn3oyz.css" media="print" onload="this.media='all'">
     <meta charset="UTF-8">
     <meta name="description" content="Looking back to a familiar moment in the past, the view widens as we grow ever more distant. New topologies become visible.s">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preload" as="image" href="https://archive-emotion.xyz/images/circle-trigger.webp">
+    
     <title>Archive Emotion</title>
   </head>
   <body>
@@ -100,16 +101,16 @@
     <canvas id="l" class="lights"></canvas>
     <canvas id="l-rev" class="lights flipped"></canvas>
     <div id="video-preloader">
-      <!-- <video loop muted id="video"></video> -->
-      <video loop muted id="video1" crossorigin="anonymous"></video>
-      <video loop muted id="video2" crossorigin="anonymous"></video>
-
+      <video loop muted id="video1" crossorigin="anonymous" preload="metadata"></video>
+      <video loop muted id="video2" crossorigin="anonymous" preload="metadata"></video>
     </div>
     <div id="audio-preloader">
       <audio id="audio" preload="metadata" >HTML5 audio not supported</audio>
     </div>
-    <!-- <img id="preload" src="images/still.jpeg"> -->
-    <!-- <script src='move.min.js'></script> -->
+
     <script type="text/javascript" src="scripts.min.js"></script>
+
+
   </body>
 </html>
+
